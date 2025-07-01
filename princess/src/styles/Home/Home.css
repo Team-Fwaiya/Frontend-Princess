@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Hahmlet";
+  src: url("../../../public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SonsieOne";
+  src: url("../../../public/font/SonsieOne-Regular.ttf") format("truetype");
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-family: "Hahmlet";
+    font-size: 24px;
+    font-weight: 700;
+}
