@@ -108,7 +108,7 @@ const Mypage = () => {
             alt={"left_square"}
             className="square-column-right"
           />
-          <Link to="/home">
+          <Link to="/">
             <img
               src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
               alt={"exit"}
