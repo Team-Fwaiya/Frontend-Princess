@@ -1,0 +1,161 @@
+@font-face {
+  font-family: "Hahmlet";
+  src: url("../../../public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SonsieOne";
+  src: url("../../../public/font/SonsieOne-Regular.ttf") format("truetype");
+}
+
+/* container */
+.mypage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.mypage-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 84px 0;
+    gap: 54px;
+}
+
+/* 공통 텍스트 */
+.regular-text {
+    font-family: "Hahmlet";
+    font-size: 24px;
+    font-weight: 600;
+    color: #403230;
+}
+
+/* 나가기 버튼 */
+.exit-icon {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 16px;
+    right: 72px;
+}
+
+/* 양쪽 기둥 */
+.square-column-right,
+.square-column-left {
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.square-column-right {
+    transform: scaleX(-1);
+}
+
+.square-column-right-wrapper {
+    position: relative;
+}
+
+/* user info */
+.user-info-container {
+    display: flex;
+    width: 100%;    
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+}
+
+.user-info-profile {
+    width: 380px;
+    height: 380px;
+    object-fit: contain;
+}
+
+.user-info-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-section {
+    display: flex;
+    height: 380px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.user-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.user-info-big-text {
+    font-family: "Hahmlet";
+    font-size: 40px;
+    font-weight: 600;
+    color: #403230;
+}
+
+.user-level-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+/* 버전, 약관, 로그아웃, 회원탈퇴 section */
+.user-util-section {
+    display: flex;
+    gap: 16px;
+    color: #999999;
+}
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* 북마크 테이블 section */
+.bookmark-container {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 28px;
+    flex-direction: column;
+}
+
+.bookmark-table-wrapper {
+    width: 100%;
+    min-width: 750px;
+}
+
+.bookmark-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bookmark-table th,
+.bookmark-table td {
+    border: 1px solid #403230;
+    padding: 8px;
+    text-align: center;
+    min-width: 50px;
+    font-weight: 400;
+}
+
+.bookmark-table th {
+    background-color: #FFE4F3;
+    font-weight: 700;
+}
+
+.bookmark-table td:last-child {
+    color: gray;
+    text-decoration: underline;
+}
