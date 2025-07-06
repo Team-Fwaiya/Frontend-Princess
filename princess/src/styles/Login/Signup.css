@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "Hahmlet";
+  src: url("../../../public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SonsieOne";
+  src: url("../../../public/font/SonsieOne-Regular.ttf") format("truetype");
+}
+
+/* container */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.signup-contents {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    margin: 84px 0;
+}
+
+/* 공통 텍스트 */
+.regular-text {
+    font-family: "Hahmlet";
+    font-size: 20px;
+    font-weight: 600;
+    color: #403230;
+}
+
+/* 나가기 버튼 */
+.exit-icon {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 16px;
+    right: 72px;
+}
+
+/* 양쪽 기둥 */
+.square-column-right,
+.square-column-left {
+    width: 40px;
+}
+
+.square-column-right {
+    transform: scaleX(-1);
+}
+
+.square-column-right-wrapper {
+    position: relative;
+}
+
+/* 왼쪽 입력 section */
+.left-contents {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 48px;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.question-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.question-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.left-contents input {
+    width: 300px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 10px;
+    border: 1px solid #999999;
+}
+
+input::placeholder {
+  font-family: "Hahmlet";
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+}
+
+
+.submit-button {
+    width: 332px;
+    height: 48px;
+    background-color: #FFE4F3;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+}
+
+/* 오른쪽 집사 section */
+.right-contents {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.waiter-image {
+    width: 60%;
+    height: auto;
+    position: relative;
+}
+
+.bubble-wrapper {
+    position: relative;
+    width: 350px;
+    height: auto;
+    margin-bottom: -58px;
+}
+
+.bubble-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.bubble-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -62%);
+    width: 80%;
+    font-family: "Hahmlet";
+    font-size: 16px;
+    font-weight: 600;
+    color: #403230;
+    text-align: start;
+    line-height: 1.4;
+}
