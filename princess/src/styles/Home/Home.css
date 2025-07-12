@@ -110,7 +110,7 @@ body {
 .sentence-container .bookcover {
   position: absolute;
   left: 1070px;
-  bottom: 25px;
+  top: 30px;
 }
 
 .sentence-container .bookcover img {
@@ -176,56 +176,61 @@ body {
 }
 
 .readinglog-container {
-  width: 88%;
-  margin: 50px auto;
-  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
   padding: 20px;
   font-family: "Hahmlet";
+  position: relative;
+  height: 0px;
 }
 
-.readinglog-container .introduction-title {
+.introduction-title {
   font-size: 1.7rem;
   font-weight: bold;
   color: #403230;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .bubble-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 88%;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 600px;
 }
 
 .bubble-image {
-  left: -50px;
-  width: 900px !important;
-  height: -100px !important;
+  width: 1000px !important;
+  display: block;
+  margin-top: -150px;
+  margin-left:-200px;
 }
-
 
 .bubble-text {
   position: absolute;
-  left: -300px;
-  font-size: 1.5rem;
+  font-size: 1.3rem !important;
   font-weight: bold;
   color: #403230;
-  font-family: "Hahmlet";
-  width: 500px
+  width: 750px !important;
+  line-height: 1.6;
+  top: 170px !important;
+  left: 310px !important;
+}
+
+.waiter-image {
+  right: -830px !important;
+  width: 450px !important;
+  height: auto;
+  top: -330px;
+  display: block;
 }
 
 .bookcover {
   position: absolute;
-  bottom: 170px;
-  left: 965px;
-  width: 80px !important;
+  right: 230px;
+  width: 100px;
+  top: 65px;
+  height: auto;
 }
 
-.waiter-image {
-  position: absolute;
-  bottom: 0;
-  left: 280px;
-  width: 350px !important;
-}
 
