@@ -1,0 +1,32 @@
+/* 기본적인 css는 Signup.css 사용 */
+@font-face {
+  font-family: "Hahmlet";
+  src: url("../../../public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
+}
+
+.left-contents.signin {
+    justify-content: flex-end;
+}
+
+/* 회원가입 이동 글씨 */
+.signin-wrapper {
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.signin-text {
+    font-family: "Hahmlet";
+    font-size: 14px;
+    font-weight: 400;
+    color: #999999;
+}
+
+.right-arrow-icon {
+    width: 24px;
+    height: 24px;
+}
