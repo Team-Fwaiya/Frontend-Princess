@@ -6,6 +6,7 @@ import Window from "./components/Window";
 import Home from "./pages/Home/Home";
 import Mypage from "./pages/Mypage/Mypage";
 import Signup from "./pages/Login/Signup";
+import Signin from "./pages/Login/Signin";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
         </Routes>
       </Router>
     </div>
