@@ -8,15 +8,229 @@
   src: url("../../../public/font/SonsieOne-Regular.ttf") format("truetype");
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+body {
+  background-color: #FFE4F3;
 }
 
-h1 {
-    font-family: "Hahmlet";
-    font-size: 24px;
-    font-weight: 700;
+.title-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
 }
+
+.mypage {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin-right: 150px;
+}
+
+.mypage1{
+  position: absolute;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  z-index: 3;
+}
+
+.signup {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-right: 110px;
+}
+
+.signup1{
+  position: absolute;
+  margin-top: -5px;
+  width: 100px;
+  height: 100px;
+  z-index: 3;
+}
+
+.sentence-container {
+  background-color: white;
+  width: 83%;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 15px;
+  font-family: "Hahmlet";
+  position: relative;
+}
+
+.sentence-container .title {
+  font-family: "Hahmlet";
+  font-size: 1.7rem;
+  font-weight: bold;
+  text-align: left;
+  margin-top: -10px;
+  color: #403230;
+}
+
+.sentence-container .mark-left {
+  font-size: 1.8rem;
+  font-family: "SonsieOne";
+  color: #403230;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.sentence-container .mark-right {
+  font-size: 1.8rem;
+  font-family: "SonsieOne";
+  color: #403230;
+  text-align: right;
+  padding-top: 10px;
+  padding-right: 100px;
+}
+
+.sentence-container .sentence {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px;
+  padding-right: 160px;
+  color: #403230;
+}
+
+.sentence-container .introduction {
+  font-size: 1rem;
+  color: #403230;
+  margin-top: 5px;
+  margin-bottom: -10px;
+  padding-left: 650px;
+}
+
+.sentence-container .container {
+  padding-right: 100px;
+}
+
+.sentence-container .bookcover {
+  position: absolute;
+  left: 1070px;
+  top: 30px;
+}
+
+.sentence-container .bookcover img {
+  width: 130px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.introduction-container {
+  width: 88%;
+  margin: 50px auto;
+}
+
+.introduction-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-family: "Hahmlet";
+}
+
+.introduction-name {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #403230;
+}
+
+.introduction-right img {
+  width: 800px;
+  height: 80px;
+}
+
+.introduction {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+}
+
+.book-item {
+  width: 120px;
+  text-align: center;
+  font-family: "Hahmlet";
+  padding: 13px;
+}
+
+.book-item img {
+  width: 100%;
+  border-radius: 5px;
+  background-color: transparent; /* 배경 없애기 */
+  border: 5px solid #F2CE8D; /* 테두리 추가 */
+  padding: 5px;
+}
+
+.book-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.book-item .tag {
+  color: #403230;
+  font-size: 0.6rem;
+}
+
+.readinglog-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 20px;
+  font-family: "Hahmlet";
+  position: relative;
+  height: 0px;
+}
+
+.introduction-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #403230;
+  margin-bottom: 30px;
+}
+
+.bubble-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 600px;
+}
+
+.bubble-image {
+  width: 1000px !important;
+  display: block;
+  margin-top: -150px;
+  margin-left:-200px;
+}
+
+.bubble-text {
+  position: absolute;
+  font-size: 1.3rem !important;
+  font-weight: bold;
+  color: #403230;
+  width: 750px !important;
+  line-height: 1.6;
+  top: 170px !important;
+  left: 310px !important;
+}
+
+.waiter-image {
+  right: -830px !important;
+  width: 450px !important;
+  height: auto;
+  top: -330px;
+  display: block;
+}
+
+.bookcover {
+  position: absolute;
+  right: 230px;
+  width: 100px;
+  top: 65px;
+  height: auto;
+}
+
+
