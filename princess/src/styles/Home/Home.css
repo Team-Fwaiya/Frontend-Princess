@@ -40,14 +40,14 @@ body {
   position: absolute;
   width: 10px;
   height: 10px;
-  margin-right: 110px;
+  margin-right: 90px;
 }
 
 .signup1{
   position: absolute;
-  margin-top: -5px;
-  width: 100px;
-  height: 100px;
+  margin-top: 0px;
+  width: 80px;
+  height: 70px;
   z-index: 3;
 }
 

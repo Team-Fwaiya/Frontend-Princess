@@ -70,7 +70,7 @@ const Home = () => {
         </Link>
         <Link to='/signup' className="signup">
           <img
-          src={`${process.env.PUBLIC_URL}/img/goto mypage.png`}
+          src={`${process.env.PUBLIC_URL}/img/login.png`}
           alt="princess"
           className="signup1"
           />
