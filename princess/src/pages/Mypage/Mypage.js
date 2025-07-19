@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./../../styles/Mypage/Mypage.css";
+import styles from "./../../styles/Mypage/Mypage.module.css";
 import Title from "../../components/Title";
 
 const Mypage = () => {
@@ -22,62 +22,64 @@ const Mypage = () => {
   ];
 
   return (
-    <div className="mypage-container">
+    <div className={styles["mypage-container"]}>
       <Title title_text="♥ Princess Page ♥" />
-      <div className="mypage-wrapper">
+      <div className={styles["mypage-wrapper"]}>
         <img
           src={`${process.env.PUBLIC_URL}/img/square_column/mypage_square.svg`}
-          alt={"left_square"}
-          className="square-column-left"
+          alt="left_square"
+          className={styles["square-column-left"]}
         />
-        <div className="mypage-contents">
-          <div className="user-info-container">
+        <div className={styles["mypage-contents"]}>
+          <div className={styles["user-info-container"]}>
             <img
               src={`${process.env.PUBLIC_URL}/img/profile/profile_1.png`}
-              alt={"user_profile"}
-              className="user-info-profile"
+              alt="user_profile"
+              className={styles["user-info-profile"]}
             />
-            <div className="user-info-text-container">
-              <div className="user-info-section">
-                <div className="user-info-wrapper">
-                  <div className="regular-text">
+            <div className={styles["user-info-text-container"]}>
+              <div className={styles["user-info-section"]}>
+                <div className={styles["user-info-wrapper"]}>
+                  <div className={styles["regular-text"]}>
                     Q. 공주님, 어떻게 불러드릴까요?
                   </div>
-                  <div className="user-info-big-text">이사장</div>
+                  <div className={styles["user-info-big-text"]}>이사장</div>
                 </div>
-                <div className="user-info-wrapper">
-                  <div className="regular-text">
+                <div className={styles["user-info-wrapper"]}>
+                  <div className={styles["regular-text"]}>
                     Q. 공주님, 생년월일이 어떻게 되시나요?
                   </div>
-                  <div className="user-info-big-text">2003년 01월 02일</div>
+                  <div className={styles["user-info-big-text"]}>
+                    2003년 01월 02일
+                  </div>
                 </div>
-                <div className="user-info-wrapper">
-                  <div className="regular-text">
+                <div className={styles["user-info-wrapper"]}>
+                  <div className={styles["regular-text"]}>
                     공주님의 현재 독서 레벨은...
                   </div>
-                  <div className="user-level-wrapper">
-                    <div className="user-info-big-text">상인, </div>
-                    <div className="regular-text">다음 레벨까지 </div>
-                    <div className="user-info-big-text">3권 </div>
-                    <div className="regular-text">남았습니다.</div>
+                  <div className={styles["user-level-wrapper"]}>
+                    <div className={styles["user-info-big-text"]}>상인, </div>
+                    <div className={styles["regular-text"]}>다음 레벨까지 </div>
+                    <div className={styles["user-info-big-text"]}>3권 </div>
+                    <div className={styles["regular-text"]}>남았습니다.</div>
                   </div>
                 </div>
-                <div className="user-util-section">
+                <div className={styles["user-util-section"]}>
                   <div>v.1.0.0</div>
                   <div>이용약관</div>
-                  <div className="underline">로그아웃</div>
-                  <div className="underline">회원탈퇴</div>
+                  <div className={styles.underline}>로그아웃</div>
+                  <div className={styles.underline}>회원탈퇴</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bookmark-container">
-            <div className="regular-text">
+          <div className={styles["bookmark-container"]}>
+            <div className={styles["regular-text"]}>
               공주님, 다음을 기약하신 책 목록입니다.
             </div>
-            <div className="bookmark-table-wrapper">
-              <table className="bookmark-table">
+            <div className={styles["bookmark-table-wrapper"]}>
+              <table className={styles["bookmark-table"]}>
                 <thead>
                   <tr>
                     <th></th>
@@ -102,17 +104,17 @@ const Mypage = () => {
             </div>
           </div>
         </div>
-        <div className="square-column-right-wrapper">
+        <div className={styles["square-column-right-wrapper"]}>
           <img
             src={`${process.env.PUBLIC_URL}/img/square_column/mypage_square.svg`}
-            alt={"left_square"}
-            className="square-column-right"
+            alt="left_square"
+            className={styles["square-column-right"]}
           />
           <Link to="/">
             <img
               src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
-              alt={"exit"}
-              className="exit-icon"
+              alt="exit"
+              className={styles["exit-icon"]}
             />
           </Link>
         </div>

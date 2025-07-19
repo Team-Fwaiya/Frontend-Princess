@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./../../styles/Login/Signup.css";
-import "./../../styles/Login/Signin.css";
+import signupStyles from "./../../styles/Login/Signup.module.css";
+import signinStyles from "./../../styles/Login/Signin.module.css";
 import Title from "../../components/Title";
 
 const Signin = () => {
@@ -15,30 +15,32 @@ const Signin = () => {
   };
 
   return (
-    <div className="signup-container">
+    <div className={signupStyles["signup-container"]}>
       <Title title_text="♥ Sign in Page ♥" />
-      <div className="signup-wrapper">
+      <div className={signupStyles["signup-wrapper"]}>
         <img
           src={`${process.env.PUBLIC_URL}/img/square_column/signup_square.svg`}
           alt={"left_square"}
-          className="square-column-left"
+          className={signupStyles["square-column-left"]}
         />
-        <div className="signup-contents">
-          <div className="left-contents signin">
-            <div className="question-container">
-              <div className="question-wrapper">
-                <div className="question-section">
-                  <div className="regular-text">
+        <div className={signupStyles["signup-contents"]}>
+          <div
+            className={`${signupStyles["left-contents"]} ${signinStyles["left-contents-signin"]}`}
+          >
+            <div className={signupStyles["question-container"]}>
+              <div className={signupStyles["question-wrapper"]}>
+                <div className={signupStyles["question-section"]}>
+                  <div className={signupStyles["regular-text"]}>
                     Q. 공주님, 아이디를 입력해주세요.
                   </div>
                   <input
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
                     placeholder="아이디를 입력해주세요"
-                  ></input>
+                  />
                 </div>
-                <div className="question-section">
-                  <div className="regular-text">
+                <div className={signupStyles["question-section"]}>
+                  <div className={signupStyles["regular-text"]}>
                     Q. 공주님, 비밀번호를 입력해주세요.
                   </div>
                   <input
@@ -51,32 +53,34 @@ const Signin = () => {
               </div>
             </div>
             <button
-              className="submit-button regular-text"
+              className={`${signupStyles["submit-button"]} ${signupStyles["regular-text"]}`}
               onClick={handleSubmit}
             >
               작성 완료
             </button>
             <Link
               to="/signup"
-              className="signin-wrapper"
+              className={signinStyles["signin-wrapper"]}
               style={{ textDecoration: "none" }}
             >
-              <div className="signin-text">처음 뵙는 공주님은 이쪽입니다</div>
+              <div className={signinStyles["signin-text"]}>
+                처음 뵙는 공주님은 이쪽입니다
+              </div>
               <img
                 src={`${process.env.PUBLIC_URL}/icon/right_arrow.svg`}
                 alt={"right_arrow"}
-                className="right-arrow-icon"
+                className={signinStyles["right-arrow-icon"]}
               />
             </Link>
           </div>
-          <div className="right-contents">
-            <div className="bubble-wrapper">
+          <div className={signupStyles["right-contents"]}>
+            <div className={signupStyles["bubble-wrapper"]}>
               <img
                 src={`${process.env.PUBLIC_URL}/img/bubble/mypage_bubble.png`}
                 alt="bubble"
-                className="bubble-image"
+                className={signupStyles["bubble-image"]}
               />
-              <div className="bubble-text">
+              <div className={signupStyles["bubble-text"]}>
                 어서오세요 공주님,
                 <br />
                 돌아오셔서 이 집사는 매우 기쁩니다.
@@ -89,21 +93,21 @@ const Signin = () => {
             <img
               src={`${process.env.PUBLIC_URL}/img/waiter_2.png`}
               alt="waiter"
-              className="waiter-image"
+              className={signupStyles["waiter-image"]}
             />
           </div>
         </div>
-        <div className="square-column-right-wrapper">
+        <div className={signupStyles["square-column-right-wrapper"]}>
           <img
             src={`${process.env.PUBLIC_URL}/img/square_column/signup_square.svg`}
             alt={"left_square"}
-            className="square-column-right"
+            className={signupStyles["square-column-right"]}
           />
           <Link to="/">
             <img
               src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
               alt={"exit"}
-              className="exit-icon"
+              className={signupStyles["exit-icon"]}
             />
           </Link>
         </div>
