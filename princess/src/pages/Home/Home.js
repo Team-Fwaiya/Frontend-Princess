@@ -141,14 +141,16 @@ const Home = () => {
         </div>
         <div className={styles.introduction}>
           {products.map((product, index) => (
-            <div className={styles["book-item"]} key={index}>
-              <img src={product.imagePath} alt={product.title} />
-              <p>
-                {product.title}
-                <br />
-                {product.author}
-              </p>
-            </div>
+            <Link to="/discussion" className={styles.discussion}>
+              <div className={styles["book-item"]} key={index}>
+                <img src={product.imagePath} alt={product.title} />
+                <p>
+                  {product.title}
+                  <br />
+                  {product.author}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -166,11 +168,13 @@ const Home = () => {
             독서록 쓰러 고고!
           </div>
         </div>
-        <img
-          src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-          alt="book"
-          className={styles.bookcover}
-        />
+        <Link to="/readinglog" className={styles.readinglog}>
+          <img
+            src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+            alt="book"
+            className={styles.bookcover}
+          />
+        </Link>
         <img
           src={`${process.env.PUBLIC_URL}/img/waiter_1.png`}
           alt="waiter"

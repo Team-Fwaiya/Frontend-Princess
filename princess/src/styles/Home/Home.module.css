@@ -202,7 +202,7 @@ body {
 .bubble-image {
   width: 1000px !important;
   display: block;
-  margin-top: -150px;
+  margin-top: -50px;
   margin-left:-200px;
 }
 
@@ -213,16 +213,15 @@ body {
   color: #403230;
   width: 750px !important;
   line-height: 1.6;
-  top: 170px !important;
-  left: 310px !important;
+  top: 120px !important;
+  left: -110px !important;
 }
 
 .waiter-image {
-  right: -830px !important;
+  margin-left: 840px;
   width: 450px !important;
   height: auto;
-  top: -330px;
-  display: block;
+  margin-top: -40px;
 }
 
 .bookcover {
