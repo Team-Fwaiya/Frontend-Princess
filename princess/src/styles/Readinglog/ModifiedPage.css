@@ -1,0 +1,145 @@
+.modify-container {
+  background-color: #ffeef6;
+  min-height: 100vh;
+  padding: 30px 0;
+  font-family: "Nanum Gothic", sans-serif;
+  position: relative;
+}
+
+.modify-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 50px;
+  position: relative;
+}
+
+.square-column-left,
+.square-column-right {
+  width: 50px;
+  height: auto;
+}
+
+.modify-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 900px;
+  min-height: 550px;
+  padding: 30px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.letter-section {
+  width: 65%;
+  padding: 30px;
+  border-radius: 20px;
+  font-family: "Nanum Myeongjo", serif;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: inset 0 0 10px rgba(255, 192, 203, 0.3);
+}
+
+.self-quote {
+  font-size: 14px;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.book-text {
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.letter-edit-box {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 15px;
+  font-family: "Nanum Gothic", sans-serif;
+  resize: none;
+  background-color: #fff5fa;
+  line-height: 1.6;
+}
+
+.book-date {
+  text-align: right;
+  font-size: 13px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.book-info-box {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-cover {
+  width: 130px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.book-tag {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.book-title,
+.book-author,
+.book-genre,
+.book-rating {
+  font-size: 14px;
+  margin: 4px 0;
+  font-weight: bold;
+  color: #222;
+  text-align: left;
+  width: 100%;
+}
+
+.book-input {
+  margin: 4px 0;
+  padding: 5px 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.book-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffb5d8;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #ff89c2;
+}

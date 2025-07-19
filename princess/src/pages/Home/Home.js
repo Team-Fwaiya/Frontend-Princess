@@ -153,9 +153,9 @@ const Home = () => {
               </div>
         </div>
         <img
-              src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-              alt="book"
-              className="bookcover"
+            src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+            alt="book"
+            className="bookcover"
         />
         <img
               src={`${process.env.PUBLIC_URL}/img/waiter_1.png`}

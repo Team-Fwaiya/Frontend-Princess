@@ -7,6 +7,8 @@ import Home from "./pages/Home/Home";
 import Mypage from "./pages/Mypage/Mypage";
 import Signup from "./pages/Login/Signup";
 import Signin from "./pages/Login/Signin";
+import Readinglog from "./pages/Readinglog/Readinglog";
+import ModifiedPage from "./pages/Readinglog/ModifiedPage";
 
 function App() {
   return (
@@ -18,10 +20,12 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/readinglog" element={<Readinglog />} />
+          <Route path="/modifiedpage" element={<ModifiedPage />} />
         </Routes>
       </Router>
     </div>
   );
-}
+};
 
 export default App;
