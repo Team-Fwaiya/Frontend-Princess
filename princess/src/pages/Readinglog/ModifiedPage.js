@@ -8,7 +8,7 @@ const ModifiedPage = () => {
     author: "김영하",
     genre: "철학",
     rating: 4,
-    tag: "#삶이테마 #후회없는선택",
+    tag: "#삶의태도 #후회없는선택",
     imagePath: "/img/AA1CECcz.jpeg",
     date: "2025.06.30.MON",
   });
@@ -86,7 +86,7 @@ const ModifiedPage = () => {
               alt="book-cover"
               className="book-cover"
             />
-            <p className="book-tag">{book.tag}</p>
+            <p className="hashtag">{book.tag}</p>
             {isEditing ? (
               <>
                 <input
@@ -127,6 +127,14 @@ const ModifiedPage = () => {
                   }
                   placeholder="Rating"
                 />
+                  <input
+                  className="book-input"
+                  value={tempBook.tag}
+                  onChange={(e) =>
+                    setTempBook({ ...tempBook, tag: e.target.value })
+                  }
+                  placeholder="Tags"
+                />
               </>
             ) : (
               <>
@@ -141,13 +149,9 @@ const ModifiedPage = () => {
 
             <div className="button-group">
               {isEditing ? (
-                <button className="book-btn" onClick={handleSaveClick}>
-                  저장
-                </button>
+                <button className="book-btn" onClick={handleSaveClick}>💾</button>
               ) : (
-                <button className="book-btn" onClick={handleEditClick}>
-                  수정
-                </button>
+                 <button className="book-btn" onClick={handleEditClick}>✏️</button>
               )}
               <button className="book-btn">📨</button>
               <button className="book-btn">🗑️</button>
