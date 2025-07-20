@@ -37,3 +37,13 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Hahmlet";
+  src: url("/public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SonsieOne";
+  src: url("/public/font/SonsieOne-Regular.ttf") format("truetype");
+}

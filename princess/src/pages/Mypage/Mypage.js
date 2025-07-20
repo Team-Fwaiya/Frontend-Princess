@@ -3,8 +3,15 @@ import { Link } from "react-router-dom";
 
 import styles from "./../../styles/Mypage/Mypage.module.css";
 import Title from "../../components/Title";
+import BookmarkModal from "./BookmarkModal";
 
 const Mypage = () => {
+  // 북마크 INSERT 모달 상태 관리
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   // 북마크한 책 목록
   const bookList = [
     {
@@ -75,9 +82,23 @@ const Mypage = () => {
           </div>
 
           <div className={styles["bookmark-container"]}>
-            <div className={styles["regular-text"]}>
-              공주님, 다음을 기약하신 책 목록입니다.
+            <div className={styles["bookmark-title-wrapper"]}>
+              <div className={styles["regular-text"]}>
+                공주님, 다음을 기약하신 책 목록입니다.
+              </div>
+              <div
+                className={styles["bookmark-text-wrapper"]}
+                onClick={openModal}
+              >
+                <div className={styles["regular-text"]}>책 추가하기</div>
+                <img
+                  src={`${process.env.PUBLIC_URL}/icon/pencil.svg`}
+                  alt="pencil"
+                  className={styles["pencil-icon"]}
+                />
+              </div>
             </div>
+            {isModalOpen && <BookmarkModal onClose={closeModal} />}
             <div className={styles["bookmark-table-wrapper"]}>
               <table className={styles["bookmark-table"]}>
                 <thead>
