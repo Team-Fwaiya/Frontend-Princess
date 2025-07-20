@@ -1,13 +1,3 @@
-@font-face {
-  font-family: "Hahmlet";
-  src: url("../../../public/font/Hahmlet-VariableFont_wght.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SonsieOne";
-  src: url("../../../public/font/SonsieOne-Regular.ttf") format("truetype");
-}
-
 /* container */
 .mypage-container {
     display: flex;
@@ -129,6 +119,27 @@
     align-items: flex-start;
     gap: 28px;
     flex-direction: column;
+}
+
+.bookmark-title-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.bookmark-text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #403230;
+    padding: 0 8px;
+}
+
+.pencil-icon {
+    width: 34px;
+    height: 34px;
 }
 
 .bookmark-table-wrapper {
