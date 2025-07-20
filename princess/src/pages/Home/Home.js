@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./../../styles/Home/Home.module.css";
 import Title from "../../components/Title";
 
@@ -54,11 +54,9 @@ const Home = () => {
       imagePath: "/img/AA1CECcz.jpeg",
     },
   ];
-  const location = useLocation(); // 현재 경로 얻기
-  const currentPage = location.pathname;
 
   return (
-    <div>
+    <div className={styles["home-container"]}>
       <div className={styles["title-wrapper"]}>
         <Link to="/mypage" className={styles.mypage}>
           <img
@@ -78,26 +76,21 @@ const Home = () => {
       </div>
 
       <div className={styles["sentence-container"]}>
-        <div className={styles.title}>오늘의 독서 문장</div>
-        <div className={styles.container}>
-          <div className={styles.text}>
+        <div className={styles["sentence-wrapper"]}>
+          <div className={styles.title}>오늘의 독서 문장</div>
+          <div className={styles["sentence-text-wrapper"]}>
             <div className={styles["mark-left"]}>"</div>
             <div className={styles.sentence}>
               삶은 종종 우리가 미처 몰랐던 질문을 던지고, 우리는 시간이 지나서야
               그 의미를 깨닫는다.
             </div>
             <div className={styles["mark-right"]}>"</div>
-            <div className={styles.introduction}>
+            <div className={styles.source}>
               『단 한 번의 삶』김영하 / 에세이
             </div>
           </div>
-          <div className={styles.bookcover}>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-              alt="book"
-            />
-          </div>
         </div>
+        <img src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`} alt="book" />
       </div>
 
       <div className={styles["introduction-container"]}>
@@ -157,29 +150,33 @@ const Home = () => {
 
       <div className={styles["readinglog-container"]}>
         <div className={styles["introduction-title"]}>공주님의 감상 상차림</div>
-        <div className={styles["bubble-wrapper"]}>
-          <img
-            src={`${process.env.PUBLIC_URL}/img/bubble/bubble-mainpage.png`}
-            alt="bubble"
-            className={styles["bubble-image"]}
-          />
-          <div className={styles["bubble-text"]}>
-            책 다 읽고 그냥 넘기시면… 집사가 울어버릴 수도 있어요… <br />
-            독서록 쓰러 고고!
+        <div className={styles["reading-contents"]}>
+          <div className={styles["bubble-wrapper"]}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/bubble/bubble-mainpage.png`}
+              alt="bubble"
+              className={styles["bubble-image"]}
+            />
+            <div className={styles["bubble-text"]}>
+              책 다 읽고 그냥 넘기시면… 집사가 울어버릴 수도 있어요… <br />
+              독서록 쓰러 고고!
+            </div>
+          </div>
+          <div className={styles["waiter-section"]}>
+            <Link to="/readinglog">
+              <img
+                src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+                alt="book"
+                className={styles.bookcover}
+              />
+            </Link>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/waiter_1.png`}
+              alt="waiter"
+              className={styles["waiter-image"]}
+            />
           </div>
         </div>
-        <Link to="/readinglog" className={styles.readinglog}>
-          <img
-            src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-            alt="book"
-            className={styles.bookcover}
-          />
-        </Link>
-        <img
-          src={`${process.env.PUBLIC_URL}/img/waiter_1.png`}
-          alt="waiter"
-          className={styles["waiter-image"]}
-        />
       </div>
     </div>
   );
