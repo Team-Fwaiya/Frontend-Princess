@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./../../styles/Readinglog/ModifiedPage.css";
 import Title from "../../components/Title";
+import { Link } from "react-router-dom";
 
 const ModifiedPage = () => {
   const [book, setBook] = useState({
@@ -164,6 +165,15 @@ const ModifiedPage = () => {
           className="square-column-right"
         />
       </div>
+      <div className="modify-exit">
+        <Link to="/readinglog">
+            <img
+              src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
+              alt="speech"
+              className="reading-icon"
+            />
+        </Link>
+            </div>
     </div>
   );
 };

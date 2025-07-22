@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 const Readinglog = () =>{
     const products=[
         {
-        title: "『단 한 번의 삶』",
-        author: "김영하",
-        tag: "#삶에 대하여 #나답게살기",
-        imagePath: "/img/AA1CECcz.jpeg"
+        imagePath: "/icon/add.svg"
         },
         {
         title: "『단 한 번의 삶』",

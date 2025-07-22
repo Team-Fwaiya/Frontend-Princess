@@ -12,11 +12,12 @@
   align-items: flex-start;
   gap: 40px;
   margin-top: 20px;
+  position: relative;
 }
 
 /* 좌우 테두리 이미지 */
 .square-column-left,
-.square-column-right {
+.square-column-right { 
   height: auto;
   max-height: 100%;
 }
@@ -28,51 +29,30 @@
   grid-template-columns: repeat(2, 160px); /* 가로로 2개 고정 */
   grid-auto-rows: auto;
   row-gap: 20px;
-  column-gap: 16px;
+  column-gap: 36px;
   justify-content: center;
 
-  max-height: 450px;        /* 높이 제한 */
+  max-height: 550px;        /* 높이 제한 */
   overflow-y: auto;         /* 세로 스크롤만 */
   overflow-x: hidden;       /* 가로 스크롤 제거 */
-  padding-right: 10px;      /* 스크롤바 여백 */
   margin-top: 40px;
+  margin-left: 70px;
 }
 
 /* 단일 책 카드 */
 .book-card {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: fit-content;
+  width: 100%;
 }
 
 /* 책 이미지 */
 .book-cover {
-  width: 150px;
+  width: 170px !important;
   height: auto;
-  margin: 0px;
-  padding: 0px;
   display: block;
   border-radius: 16px;
-}
-
-/* 책 텍스트 */
-.book-info {
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.book-title {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.book-author,
-.book-tag {
-  color: #333;
-  font-size: 12.5px;
 }
 
 /* ===== 오른쪽 웨이터 + 말풍선 ===== */
@@ -87,25 +67,25 @@
 
 .comment-bubble {
   position: absolute;
-  top: 40px;             /* 아래로 */
+  top: 35px;             /* 아래로 */
   left: 30px;            /* 오른쪽으로 */
-  width: 80%;;
+  width: 80%;
 }
 
 /* 말풍선 이미지 */
 .readinglog_bubble {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 10px;
+  left: 52px;
+  width: 75%;
 }
 
 /* 말풍선 텍스트 */
 .bubble-text {
   position: absolute!important;
-  top: 100px!important;
-  left: 220px!important;
-  width: calc(100% - 50px)!important;
+  top: 70px!important;
+  left: 90px!important;
+  width: calc(100% - 40px)!important;
   z-index: 1!important;  /* ← 말풍선 이미지 위로 올라오게 */
   text-align: left!important;
 }
@@ -132,9 +112,9 @@
 
 .reading-exit{
   position: absolute;
-  top: 220px ;      /* 위에서 10px */
+  top: 60px ;      /* 위에서 10px */
   right: 100px;    /* 오른쪽에서 10px */
   width: 33px;    /* 아이콘 크기 */
-  height: 24px;   /* 필요 시 비율 유지 */
-  z-index: 3;     /* 다른 요소 위에 올라오도록 */
+  height: 24px;
+  z-index: 3;  /* 필요 시 비율 유지 */
 }
