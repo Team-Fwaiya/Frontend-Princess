@@ -23,7 +23,8 @@
   border-radius: 16px;
   object-fit: contain;
   flex-shrink: 0;            
-  margin-right: 75px;      
+  margin-right: 70px;
+  margin-top: -120px;      
   z-index: 1;
   gap: 70px;
 }
