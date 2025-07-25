@@ -165,7 +165,7 @@ const Home = () => {
           <div className={styles["waiter-section"]}>
             <Link to="/readinglog">
               <img
-                src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+                src={`${process.env.PUBLIC_URL}/img/pinkbook.png`}
                 alt="book"
                 className={styles.bookcover}
               />
@@ -175,6 +175,34 @@ const Home = () => {
               alt="waiter"
               className={styles["waiter-image"]}
             />
+          </div>
+        </div>
+      </div>
+      <div className={styles["readinglog-container"]}>
+        <div className={styles["introduction-title"]}>공주님의 주변 도서관</div>
+        <div className={styles["reading-contents"]}>
+          <div className={styles["waiter-section"]}>
+              <img
+                src={`${process.env.PUBLIC_URL}/img/library.png`}
+                alt="library"
+                className={styles.library}
+              />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/waiter_1_flipped.png`}
+              alt="waiter"
+              className={styles["waiter-image"]}
+            />
+          </div>
+          <div className={styles["bubble-wrapper"]}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/bubble/bubble-mainpage_flipped.png`}
+              alt="bubble"
+              className={styles["bubble-image"]}
+            />
+            <div className={styles["bubble-text"]}>
+              공주님 계신 궁전은 어디쯤일까요? <br />
+              집사, 길 잃지 않게 살짝만 알려주실 수 있을까요?
+            </div>
           </div>
         </div>
       </div>
