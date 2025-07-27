@@ -65,7 +65,7 @@ const Home = () => {
             className={styles.mypage1}
           />
         </Link>
-        <Link to="/signup" className={styles.signup}>
+        <Link to="/signin" className={styles.signup}>
           <img
             src={`${process.env.PUBLIC_URL}/img/login.png`}
             alt="princess"

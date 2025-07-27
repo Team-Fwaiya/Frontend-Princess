@@ -1,23 +1,52 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./../../styles/Login/Signup.module.css";
 import Title from "../../components/Title";
 
+import { post } from "./../../api";
+import config from "./../../config";
+
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  const [birthdate, setBirthdate] = useState("");
+  const [address, setAddress] = useState("");
 
-  const handleSubmit = () => {
+  const [cookies] = useCookies(["accessToken"]);
+
+  const fetchJoin = async () => {
+    try {
+      const data = await post(config.LOGIN.JOIN, {
+        userId,
+        password,
+        nickname,
+        address,
+      });
+      console.log("회원가입 성공:", data);
+      navigate("/signin"); // 로그인 화면 이동
+    } catch (error) {
+      console.error("회원가입 실패:", error);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log("cookies:", cookies);
+
     // 닉네임 글자수 확인
     if (nickname.length > 8) {
       alert("닉네임은 최대 8글자까지 입력할 수 있습니다.");
       return;
     }
     // api call
-    console.log("정보:", userId, password, nickname, birthdate);
+    console.log("정보:", userId, password, nickname, address);
+    e.preventDefault();
+    fetchJoin();
   };
 
   return (
@@ -69,12 +98,12 @@ const Signup = () => {
                 </div>
                 <div className={styles["question-section"]}>
                   <div className={styles["regular-text"]}>
-                    Q. 공주님, 생년월일이 어떻게 되시나요?
+                    Q. 공주님, 왕국은 어디신가요?
                   </div>
                   <input
-                    value={birthdate}
-                    onChange={(e) => setBirthdate(e.target.value)}
-                    placeholder="예시) 2003년 01월 02일"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="예시) 경기도 고양시 덕양구"
                   />
                 </div>
               </div>
