@@ -1,17 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 import signupStyles from "./../../styles/Login/Signup.module.css";
 import signinStyles from "./../../styles/Login/Signin.module.css";
 import Title from "../../components/Title";
 
+import { post } from "./../../api";
+import config from "./../../config";
+
 const Signin = () => {
+  const navigate = useNavigate();
+
+  const [, setCookie] = useCookies(["accessToken"]);
+
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
+  const fetchLogin = async () => {
+    try {
+      const data = await post(config.LOGIN.LOGIN, { userId, password });
+      console.log("로그인 성공:", data);
+      if (data) {
+        setCookie("accessToken", data.token, {
+          path: "/",
+          maxAge: 60 * 60 * 24 * 7,
+        });
+      }
+      navigate("/"); // 홈화면 이동
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+    }
+  };
+
+  const handleSubmit = (e) => {
     // api call
     console.log("정보:", userId, password);
+    e.preventDefault();
+    fetchLogin();
   };
 
   return (

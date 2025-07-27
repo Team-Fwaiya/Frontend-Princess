@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./../../styles/Mypage/Mypage.module.css";
 import Title from "../../components/Title";
 import BookmarkModal from "./BookmarkModal";
+
+import { get, post } from "./../../api";
+import config from "./../../config";
 
 const Mypage = () => {
   // 북마크 INSERT 모달 상태 관리
@@ -11,6 +14,36 @@ const Mypage = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const fetchInfo = async () => {
+    try {
+      const data = await get(config.USERS.GET);
+      console.log("정보 조회 성공:", data);
+    } catch (error) {
+      console.error("정보 조회 실패:", error);
+      alert("정보 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const fetchWantBook = async () => {
+    try {
+      const data = await post(config.BOOKS.POST, {
+        title: "나미야 잡화점의 기적2",
+        author: "히가시노 게이고",
+        genre: "fiction",
+        coverImageUrl: "https://s3.bucket.com/image.jpg",
+        hashtags: "#감동#힐링",
+      });
+      console.log("책 추가 성공:", data);
+    } catch (error) {
+      console.error("책 추가 실패:", error);
+      alert("책 추가에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
 
   // 북마크한 책 목록
   const bookList = [
