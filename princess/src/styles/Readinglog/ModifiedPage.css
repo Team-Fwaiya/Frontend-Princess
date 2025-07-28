@@ -29,27 +29,13 @@
   gap: 40px;
 }
 
-.square-column-left{
-  width: 50px;
-  height: 610px;
-  margin-top: 40px;
-  position: absolute;
-  right: 40px;
-  top: 0;
-
-}
+.square-column-left,
 .square-column-right {
-  width: 50px;
-  height: 610px;
-  margin-top: 40px;
-  position: absolute;
-  left: 40px;
-  top: 0;
-
+  width: 40px;
 }
 
 .letter-section {
-  flex: 1; /* ✅ 추가 */
+  flex: 1;
   border-radius: 20px;
   padding: 30px;
   font-family: "Nanum Myeongjo", serif;
