@@ -24,5 +24,9 @@ const config = {
     POST: `${BASE_URL}/api/books`,
     PUT: (bookID) => `${BASE_URL}/api/books/${bookID}`,
   },
+
+  DISCUSSIONS: {
+    GET: `${BASE_URL}/api/discussions`,
+  },
 };
 export default config;

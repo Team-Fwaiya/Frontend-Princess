@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const Signin = () => {
           maxAge: 60 * 60 * 24 * 7,
         });
       }
-      navigate("/"); // 홈화면 이동
+      navigate("/home"); // 홈화면 이동
     } catch (error) {
       console.error("로그인 실패:", error);
       alert("아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -131,7 +131,7 @@ const Signin = () => {
             alt={"left_square"}
             className={signupStyles["square-column-right"]}
           />
-          <Link to="/">
+          <Link to="/home">
             <img
               src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
               alt={"exit"}

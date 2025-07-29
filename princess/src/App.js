@@ -19,10 +19,10 @@ function App() {
         <Router>
           <Window />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<Signin />} />
+            <Route path="/" element={<Signin />} />
             <Route path="/readinglog" element={<Readinglog />} />
             <Route path="/modifiedpage" element={<ModifiedPage />} />
             <Route path="/discussion" element={<Discussion />} />

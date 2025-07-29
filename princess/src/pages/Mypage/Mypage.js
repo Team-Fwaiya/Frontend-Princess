@@ -1,43 +1,39 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./../../styles/Mypage/Mypage.module.css";
 import Title from "../../components/Title";
 import BookmarkModal from "./BookmarkModal";
 
-import { get, post } from "./../../api";
+import { get } from "./../../api";
 import config from "./../../config";
 
 const Mypage = () => {
   // 북마크 INSERT 모달 상태 관리
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 사용자 정보 관리
+  const [nickname, setNickname] = useState("정보없음");
+  const [address, setAddress] = useState("정보없음");
+  const [readingLevel, setReadingLevel] = useState("정보없음");
+  const [untilNextLevel, setUntilNextLevel] = useState("정보없음");
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  // 사용자 정보 조회 api
   const fetchInfo = async () => {
     try {
       const data = await get(config.USERS.GET);
       console.log("정보 조회 성공:", data);
+
+      setNickname(data.result.nickname);
+      setAddress(data.result.address);
+      setReadingLevel(data.result.readingLevel);
+      setUntilNextLevel(data.result.untilNextLevel);
     } catch (error) {
       console.error("정보 조회 실패:", error);
       alert("정보 조회에 실패했습니다. 다시 시도해주세요.");
-    }
-  };
-
-  const fetchWantBook = async () => {
-    try {
-      const data = await post(config.BOOKS.POST, {
-        title: "나미야 잡화점의 기적2",
-        author: "히가시노 게이고",
-        genre: "fiction",
-        coverImageUrl: "https://s3.bucket.com/image.jpg",
-        hashtags: "#감동#힐링",
-      });
-      console.log("책 추가 성공:", data);
-    } catch (error) {
-      console.error("책 추가 실패:", error);
-      alert("책 추가에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -83,24 +79,26 @@ const Mypage = () => {
                   <div className={styles["regular-text"]}>
                     Q. 공주님, 어떻게 불러드릴까요?
                   </div>
-                  <div className={styles["user-info-big-text"]}>이사장</div>
+                  <div className={styles["user-info-big-text"]}>{nickname}</div>
                 </div>
                 <div className={styles["user-info-wrapper"]}>
                   <div className={styles["regular-text"]}>
-                    Q. 공주님, 생년월일이 어떻게 되시나요?
+                    공주님이 현재 살고 계신 왕국은...
                   </div>
-                  <div className={styles["user-info-big-text"]}>
-                    2003년 01월 02일
-                  </div>
+                  <div className={styles["user-info-big-text"]}>{address}</div>
                 </div>
                 <div className={styles["user-info-wrapper"]}>
                   <div className={styles["regular-text"]}>
                     공주님의 현재 독서 레벨은...
                   </div>
                   <div className={styles["user-level-wrapper"]}>
-                    <div className={styles["user-info-big-text"]}>상인, </div>
+                    <div className={styles["user-info-big-text"]}>
+                      {readingLevel}
+                    </div>
                     <div className={styles["regular-text"]}>다음 레벨까지 </div>
-                    <div className={styles["user-info-big-text"]}>3권 </div>
+                    <div className={styles["user-info-big-text"]}>
+                      {untilNextLevel}권{" "}
+                    </div>
                     <div className={styles["regular-text"]}>남았습니다.</div>
                   </div>
                 </div>
@@ -164,7 +162,7 @@ const Mypage = () => {
             alt="left_square"
             className={styles["square-column-right"]}
           />
-          <Link to="/">
+          <Link to="/home">
             <img
               src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
               alt="exit"

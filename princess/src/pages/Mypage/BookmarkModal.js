@@ -3,14 +3,32 @@ import React from "react";
 import Modal from "./../../components/Modal";
 import styles from "./../../styles/Mypage/BookmarkModal.module.css";
 
+import { post } from "./../../api";
+import config from "./../../config";
+
 const BookmarkModal = ({ onClose }) => {
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
   const [genre, setGenre] = React.useState("");
 
+  const fetchWantBook = async () => {
+    try {
+      const data = await post(config.BOOKS.POST, {
+        title: title,
+        author: author,
+        genre: genre,
+      });
+      console.log("책 추가 성공:", data);
+    } catch (error) {
+      console.error("책 추가 실패:", error);
+      alert("책 추가에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
   const handleSubmit = () => {
     if (title.length > 0 && author.length > 0 && genre.length > 0) {
       console.log("정보:", title, author, genre);
+      fetchWantBook();
       onClose();
     } else {
       alert("모든 항목을 입력해주세요");
