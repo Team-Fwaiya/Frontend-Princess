@@ -1,59 +1,41 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import styles from "./../../styles/Home/Home.module.css";
 import Title from "../../components/Title";
+import { useNavigate } from "react-router-dom";
+
+import { get } from "./../../api";
+import config from "./../../config";
 
 const Home = () => {
-  const products = [
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-    {
-      title: "『단 한 번의 삶』",
-      author: "김영하",
-      tag: "#삶에 대하여 #나답게살기",
-      imagePath: "/img/AA1CECcz.jpeg",
-    },
-  ];
+  const navigate = useNavigate();
+
+  const [bookDiscussions, setBookDiscussions] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+
+  const fetchDiscussions = async () => {
+    try {
+      const data = await get(config.DISCUSSIONS.GET);
+      console.log("정보 조회 성공:", data);
+      setBookDiscussions(data.result);
+    } catch (error) {
+      console.error("정보 조회 실패:", error);
+      alert("정보 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    // 1. 쿠키 삭제
+    removeCookie("accessToken", { path: "/" });
+    // 2. 로그인 화면으로 이동
+    navigate("/");
+  };
+
+  useEffect(() => {
+    fetchDiscussions();
+  }, []);
 
   return (
     <div className={styles["home-container"]}>
@@ -65,13 +47,13 @@ const Home = () => {
             className={styles.mypage1}
           />
         </Link>
-        <Link to="/signin" className={styles.signup}>
+        <div className={styles.signup} onClick={handleLogout}>
           <img
             src={`${process.env.PUBLIC_URL}/img/login.png`}
             alt="princess"
             className={styles.signup1}
           />
-        </Link>
+        </div>
         <Title title_text="♥ Princess' Library ♥" />
       </div>
 
@@ -107,16 +89,17 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.introduction}>
-          {products.map((product, index) => (
-            <div className={styles["book-item"]} key={index}>
-              <img src={product.imagePath} alt={product.title} />
-              <p>
-                {product.title}
-                <br />
-                {product.author}
-              </p>
-              <p className={styles.tag}>{product.tag}</p>
-            </div>
+          {bookDiscussions.map((product, index) => (
+            <Link to="/discussion" className={styles.discussion}>
+              <div className={styles["book-item"]} key={index}>
+                <img src={product.bookCoverImageUrl} alt={product.bookTitle} />
+                <p>
+                  {product.bookTitle}
+                  <br />
+                  {product.bookAuthor}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -133,14 +116,17 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.introduction}>
-          {products.map((product, index) => (
-            <Link to="/discussion" className={styles.discussion}>
+          {bookDiscussions.map((product, index) => (
+            <Link
+              to={`/discussion?discussionId=1`}
+              className={styles.discussion}
+            >
               <div className={styles["book-item"]} key={index}>
-                <img src={product.imagePath} alt={product.title} />
+                <img src={product.bookCoverImageUrl} alt={product.bookTitle} />
                 <p>
-                  {product.title}
+                  {product.bookTitle}
                   <br />
-                  {product.author}
+                  {product.bookAuthor}
                 </p>
               </div>
             </Link>
@@ -182,11 +168,11 @@ const Home = () => {
         <div className={styles["introduction-title"]}>공주님의 주변 도서관</div>
         <div className={styles["reading-contents"]}>
           <div className={styles["waiter-section"]}>
-              <img
-                src={`${process.env.PUBLIC_URL}/img/library.png`}
-                alt="library"
-                className={styles.library}
-              />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/library.png`}
+              alt="library"
+              className={styles.library}
+            />
             <img
               src={`${process.env.PUBLIC_URL}/img/waiter_1_flipped.png`}
               alt="waiter"

@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./../../styles/Discussion/Discussion.module.css";
 import Title from "../../components/Title";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Discussion = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const id = params.get("discussionId");
+  console.log("토론 ID:", id);
+
   const [comments, setComments] = useState([
     {
       id: 1,
