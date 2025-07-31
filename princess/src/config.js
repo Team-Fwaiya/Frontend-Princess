@@ -27,6 +27,12 @@ const config = {
 
   DISCUSSIONS: {
     GET: `${BASE_URL}/api/discussions`,
+    DETAIL_GET: (discussionID) => `${BASE_URL}/api/discussions/${discussionID}`,
+  },
+
+  READINGLOG: {
+    GET: `${BASE_URL}/api/reading-logs/my`,
+    POST: `${BASE_URL}/api/reading-logs`,
   },
 };
 export default config;

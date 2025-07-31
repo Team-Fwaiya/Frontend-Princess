@@ -72,16 +72,16 @@ const BookmarkModal = ({ onClose }) => {
                 <option value="" disabled>
                   장르를 선택해주세요
                 </option>
-                <option value="장르 1">자기계발</option>
-                <option value="장르 2">소설</option>
-                <option value="장르 3">경제</option>
-                <option value="장르 4">인문학</option>
-                <option value="장르 5">에세이</option>
-                <option value="장르 6">만화</option>
-                <option value="장르 7">종교</option>
-                <option value="장르 8">과학</option>
-                <option value="장르 9">사회</option>
-                <option value="장르 10">시</option>
+                <option value="improvement">자기계발</option>
+                <option value="fiction">소설</option>
+                <option value="economics">경제</option>
+                <option value="humanities">인문학</option>
+                <option value="essay">에세이</option>
+                <option value="comics">만화</option>
+                <option value="religion">종교</option>
+                <option value="science">과학</option>
+                <option value="society">사회</option>
+                <option value="poetry">시</option>
               </select>
             </div>
           </div>
