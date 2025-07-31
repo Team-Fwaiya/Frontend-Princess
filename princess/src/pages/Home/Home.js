@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [bookDiscussions, setBookDiscussions] = useState([]);
-  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const [removeCookie] = useCookies(["accessToken"]);
 
   const fetchDiscussions = async () => {
     try {

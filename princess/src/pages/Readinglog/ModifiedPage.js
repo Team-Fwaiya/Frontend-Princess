@@ -1,40 +1,55 @@
 import React, { useState } from "react";
 import "./../../styles/Readinglog/ModifiedPage.css";
 import Title from "../../components/Title";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+
+import { post } from "./../../api";
+import config from "./../../config";
 
 const ModifiedPage = () => {
-  const [book, setBook] = useState({
-    title: "단 한 번의 삶",
-    author: "김영하",
-    genre: "철학",
-    rating: 4,
-    tag: "#삶의태도 #후회없는선택",
-    imagePath: "/img/AA1CECcz.jpeg",
-    date: "2025.06.30.MON",
-  });
+  const navigate = useNavigate();
 
-  const initialContent = `우리는 모두 단 한 번뿐인 삶을 살고 있지만,
-그 사실을 자주 잊고 살아간다는 걸 이 책이 일깨워줬다.
-타인의 기대에 맞추느라 정작 스스로 원하는 삶이 무엇인지 고민해본 적이 없었다는 걸 인정하게 된다.
-죽음이 가까운 사람들 옆에서야 비로소 삶이 또렷해진다는 문장에 오래 머물렀다.
-이제는 누구의 시선보다도 나의 선택을 더 신중히 바라보고 싶다.
-한 번뿐이라는 건, 그래서 더 자유로울 수 있다는 뜻일지도 모르겠다.`;
-
-  const [content, setContent] = useState(initialContent);
   const [isEditing, setIsEditing] = useState(false);
-  const [tempText, setTempText] = useState(content);
-  const [tempBook, setTempBook] = useState(book);
+
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genre, setGenre] = useState("");
+  const [hashtag, setHashtag] = useState("");
+  const [coverImageUrl, setCoverImageUrl] = useState("");
+  const [rating, setRating] = useState(5);
+
+  const fetchSaveReadingLog = async (bookInfo) => {
+    try {
+      const data = await post(config.READINGLOG.POST, {
+        book: bookInfo,
+        oneLineReview: "",
+        content: content,
+        rating: rating,
+      });
+      console.log("책 추가 성공:", data);
+      navigate("/readinglog"); // 독서록 메인화면 이동
+    } catch (error) {
+      console.error("책 추가 실패:", error);
+      alert("책 추가에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
-    setTempText(content);
-    setTempBook(book);
   };
 
   const handleSaveClick = () => {
-    setContent(tempText);
-    setBook(tempBook);
+    const bookInfo = {
+      title,
+      author,
+      genre,
+      hashtags: hashtag,
+      coverImageUrl,
+    };
+    fetchSaveReadingLog(bookInfo);
     setIsEditing(false);
   };
 
@@ -69,89 +84,83 @@ const ModifiedPage = () => {
 
             {isEditing ? (
               <textarea
-                value={tempText}
-                onChange={(e) => setTempText(e.target.value)}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
                 className="letter-edit-box"
               />
             ) : (
               <p className="book-text">{content}</p>
             )}
-
-            <p className="book-date">{book.date}</p>
+            {/* TODO: 오늘 날짜로 들어가도록 수정 */}
+            <p className="book-date">2025년 01월 02일</p>
           </div>
 
           <div className="book-info-box">
             <img
-              src={`${process.env.PUBLIC_URL}${book.imagePath}`}
+              src={`${process.env.PUBLIC_URL}${coverImageUrl}`}
               alt="book-cover"
               className="book-cover"
             />
-            <p className="hashtag">{book.tag}</p>
+            <p className="hashtag">{hashtag}</p>
             {isEditing ? (
               <>
                 <input
                   className="book-input"
-                  value={tempBook.title}
-                  onChange={(e) =>
-                    setTempBook({ ...tempBook, title: e.target.value })
-                  }
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   placeholder="Title"
                 />
                 <input
                   className="book-input"
-                  value={tempBook.author}
-                  onChange={(e) =>
-                    setTempBook({ ...tempBook, author: e.target.value })
-                  }
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
                   placeholder="Author"
                 />
                 <input
                   className="book-input"
-                  value={tempBook.genre}
-                  onChange={(e) =>
-                    setTempBook({ ...tempBook, genre: e.target.value })
-                  }
+                  value={genre}
+                  onChange={(e) => setGenre(e.target.value)}
                   placeholder="Genre"
                 />
                 <input
                   className="book-input"
-                  value={tempBook.rating}
+                  value={rating}
                   type="number"
                   min="0"
                   max="5"
                   onChange={(e) =>
-                    setTempBook({
-                      ...tempBook,
-                      rating: Math.min(5, Math.max(0, Number(e.target.value))),
-                    })
+                    setRating(Math.min(5, Math.max(0, Number(e.target.value))))
                   }
                   placeholder="Rating"
                 />
-                  <input
+                <input
                   className="book-input"
-                  value={tempBook.tag}
-                  onChange={(e) =>
-                    setTempBook({ ...tempBook, tag: e.target.value })
-                  }
+                  value={hashtag}
+                  onChange={(e) => setHashtag(e.target.value)}
                   placeholder="Tags"
                 />
               </>
             ) : (
               <>
-                <p className="book-title">Title: {book.title}</p>
-                <p className="book-author">Author: {book.author}</p>
-                <p className="book-genre">Genre: {book.genre}</p>
+                <p className="book-title">Title: {title}</p>
+                <p className="book-author">Author: {author}</p>
+                <p className="book-genre">Genre: {genre}</p>
                 <p className="book-rating">
-                  Rating: {"★".repeat(book.rating)}{"☆".repeat(5 - book.rating)}
+                  Rating: {"★".repeat(rating)}
+                  {"☆".repeat(5 - rating)}
                 </p>
               </>
             )}
 
             <div className="button-group">
               {isEditing ? (
-                <button className="book-btn" onClick={handleSaveClick}>💾</button>
+                <button className="book-btn" onClick={handleSaveClick}>
+                  💾
+                </button>
               ) : (
-                 <button className="book-btn" onClick={handleEditClick}>✏️</button>
+                <button className="book-btn" onClick={handleEditClick}>
+                  ✏️
+                </button>
               )}
               <button className="book-btn">📨</button>
               <button className="book-btn">🗑️</button>
@@ -167,13 +176,13 @@ const ModifiedPage = () => {
       </div>
       <div className="modify-exit">
         <Link to="/readinglog">
-            <img
-              src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
-              alt="speech"
-              className="reading-icon"
-            />
+          <img
+            src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
+            alt="speech"
+            className="reading-icon"
+          />
         </Link>
-            </div>
+      </div>
     </div>
   );
 };
