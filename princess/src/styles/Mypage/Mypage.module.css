@@ -170,4 +170,5 @@
 .bookmark-table td:last-child {
     color: gray;
     text-decoration: underline;
+    cursor: pointer;
 }
