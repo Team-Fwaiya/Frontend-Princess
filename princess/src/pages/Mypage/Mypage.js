@@ -90,6 +90,18 @@ const Mypage = () => {
     }
   };
 
+  // 읽고 싶은 책 삭제
+  const fetchDeleteWantBook = async (wantID) => {
+    try {
+      const data = await del(config.USERS.DELETE(wantID));
+      console.log("읽고 싶은 책 삭제 성공:", data);
+      setRefreshTrigger((prev) => prev + 1);
+    } catch (error) {
+      console.error("읽고 싶은 책 삭제 실패:", error);
+      alert("읽고 싶은 책 삭제에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
   useEffect(() => {
     fetchInfo();
   }, [refreshTrigger]);
@@ -225,7 +237,7 @@ const Mypage = () => {
                       <td>{book.bookTitle}</td>
                       <td>{book.author}</td>
                       <td>{getKoreanGenre(book.genre)}</td>
-                      <td>삭제</td>
+                      <td onClick={() => fetchDeleteWantBook(book.id)}>삭제</td>
                     </tr>
                   ))}
                 </tbody>
