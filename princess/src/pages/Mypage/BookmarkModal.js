@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Modal from "./../../components/Modal";
 import styles from "./../../styles/Mypage/BookmarkModal.module.css";
@@ -6,19 +6,20 @@ import styles from "./../../styles/Mypage/BookmarkModal.module.css";
 import { post } from "./../../api";
 import config from "./../../config";
 
-const BookmarkModal = ({ onClose }) => {
-  const [title, setTitle] = React.useState("");
-  const [author, setAuthor] = React.useState("");
-  const [genre, setGenre] = React.useState("");
+const BookmarkModal = ({ onClose, setRefreshTrigger }) => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genre, setGenre] = useState("");
 
   const fetchWantBook = async () => {
     try {
-      const data = await post(config.BOOKS.POST, {
-        title: title,
+      const data = await post(config.USERS.WANT, {
+        bookTitle: title,
         author: author,
         genre: genre,
       });
       console.log("책 추가 성공:", data);
+      setRefreshTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("책 추가 실패:", error);
       alert("책 추가에 실패했습니다. 다시 시도해주세요.");
