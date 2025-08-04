@@ -7,6 +7,7 @@ const config = {
   LOGIN: {
     JOIN: `${BASE_URL}/join`,
     LOGIN: `${BASE_URL}/login`,
+    WITHDRAW: `${BASE_URL}/api/users/withdraw`,
   },
 
   USERS: {

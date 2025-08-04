@@ -88,6 +88,26 @@ export const del = async (endpoint, options = {}) => {
   }
 };
 
+// PATCH 요청 - 사용자 이미지 업로드
+export const patch = async (endpoint, imageFile, options = {}) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", imageFile);
+
+    const response = await api.post(endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      ...options,
+    });
+
+    validateContentType(response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // 응답 타입 검사 함수
 const validateContentType = (response) => {
   const contentType = response.headers["content-type"] || "";
