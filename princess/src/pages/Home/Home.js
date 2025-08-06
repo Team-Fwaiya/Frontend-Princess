@@ -12,7 +12,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [bookDiscussions, setBookDiscussions] = useState([]);
-  const [removeCookie] = useCookies(["accessToken"]);
+  const [bookRanking, setBookRanking] = useState([]);
+  const [quotes, setQuotes] = useState({ message: "", author: "" });
+  const [libraries, setLibraries] = useState([]);
+  const [userimage, setUserImage] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
   const fetchDiscussions = async () => {
     try {
@@ -22,6 +26,50 @@ const Home = () => {
     } catch (error) {
       console.error("정보 조회 실패:", error);
       alert("정보 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const RankingBooks = async () => {
+    try {
+      const data = await get(config.BOOKS.RANKING.GET);
+      console.log("랭킹 조회 성공:", data);
+      setBookRanking(data.result);
+    } catch (error) {
+      console.error("랭킹 조회 실패:", error);
+      alert("랭킹 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const fetchQuotes = async () => {
+    try {
+      const data = await get(config.QUOTES.GET);
+      console.log("명언 조회 성공:", data);
+      setQuotes(data.result);
+    } catch (error) {
+      console.error("명언 조회 실패:", error);
+      alert("명언 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const fetchLibraries = async () => {
+    try {
+      const data = await get(config.LIBRARIES.NEARBY.GET);
+      console.log("도서관 조회 성공:", data);
+      setLibraries(data.result);
+    } catch (error) {
+      console.error("도서관 조회 실패:", error);
+      alert("도서관 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const fetchUserImage = async () => {
+    try {
+      const data = await get(config.USERS.GET);
+      console.log("프로필 조회 성공:", data);
+      setUserImage(data.result);
+    } catch (error) {
+      console.error("프로필 조회 실패:", error);
+      alert("프로필 조회에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -35,6 +83,10 @@ const Home = () => {
 
   useEffect(() => {
     fetchDiscussions();
+    fetchQuotes();
+    fetchLibraries();
+    RankingBooks();
+    fetchUserImage();
   }, []);
 
   return (
@@ -42,37 +94,35 @@ const Home = () => {
       <div className={styles["title-wrapper"]}>
         <Link to="/mypage" className={styles.mypage}>
           <img
-            src={`${process.env.PUBLIC_URL}/img/goto mypage.png`}
+            src={userimage.imagePath}
             alt="princess"
             className={styles.mypage1}
           />
         </Link>
         <div className={styles.signup} onClick={handleLogout}>
           <img
-            src={`${process.env.PUBLIC_URL}/img/login.png`}
+            src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
             alt="princess"
             className={styles.signup1}
           />
         </div>
-        <Title title_text="♥ Princess' Library ♥" />
+        <Title title_text="♥ Princess' Diary ♥" />
       </div>
 
       <div className={styles["sentence-container"]}>
         <div className={styles["sentence-wrapper"]}>
-          <div className={styles.title}>오늘의 독서 문장</div>
+          <div className={styles.title}>오늘의 명언</div>
           <div className={styles["sentence-text-wrapper"]}>
             <div className={styles["mark-left"]}>"</div>
             <div className={styles.sentence}>
-              삶은 종종 우리가 미처 몰랐던 질문을 던지고, 우리는 시간이 지나서야
-              그 의미를 깨닫는다.
+              {quotes.message}
             </div>
             <div className={styles["mark-right"]}>"</div>
             <div className={styles.source}>
-              『단 한 번의 삶』김영하 / 에세이
+              {quotes.author}
             </div>
           </div>
         </div>
-        <img src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`} alt="book" />
       </div>
 
       <div className={styles["introduction-container"]}>
@@ -89,17 +139,17 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.introduction}>
-          {bookDiscussions.map((product, index) => (
-            <Link to="/discussion" className={styles.discussion}>
+          {bookRanking.map((product, index) => (
               <div className={styles["book-item"]} key={index}>
-                <img src={product.bookCoverImageUrl} alt={product.bookTitle} />
+                <img src={product.coverImageUrl} alt={product.title} />
                 <p>
-                  {product.bookTitle}
+                  {product.title}
                   <br />
-                  {product.bookAuthor}
+                  {product.author}
+                  <br />
+                  {product.hashtags}
                 </p>
               </div>
-            </Link>
           ))}
         </div>
       </div>
@@ -186,8 +236,18 @@ const Home = () => {
               className={styles["bubble-image"]}
             />
             <div className={styles["bubble-text"]}>
-              공주님 계신 궁전은 어디쯤일까요? <br />
-              집사, 길 잃지 않게 살짝만 알려주실 수 있을까요?
+              공주님 주변 도서관입니다. <br />
+              {libraries.map((lib, index) => (
+                <div className={styles["libraries"]} key={index}>
+                  {lib.libraryName}
+                  <br />
+                  {lib.sido}
+                  <br />
+                  {lib.sigungu}
+                  <br />
+                  {lib.address}
+                </div>
+              ))}
             </div>
           </div>
         </div>

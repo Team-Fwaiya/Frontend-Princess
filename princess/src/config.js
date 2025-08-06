@@ -23,6 +23,9 @@ const config = {
     BOOKS: `${BASE_URL}/api/books`,
     POST: `${BASE_URL}/api/books`,
     PUT: (bookID) => `${BASE_URL}/api/books/${bookID}`,
+    RANKING:{
+      GET: `${BASE_URL}/api/books/ranking`,
+    }
   },
 
   DISCUSSIONS: {
@@ -33,6 +36,16 @@ const config = {
   READINGLOG: {
     GET: `${BASE_URL}/api/reading-logs/my`,
     POST: `${BASE_URL}/api/reading-logs`,
+  },
+
+  QUOTES:{
+    GET: `${BASE_URL}/api/quotes`,
+  },
+
+  LIBRARIES:{
+    NEARBY:{
+      GET: `${BASE_URL}/api/libraries/nearby`,
+    }
   },
 };
 export default config;
