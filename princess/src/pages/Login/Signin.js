@@ -131,13 +131,6 @@ const Signin = () => {
             alt={"left_square"}
             className={signupStyles["square-column-right"]}
           />
-          <Link to="/home">
-            <img
-              src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
-              alt={"exit"}
-              className={signupStyles["exit-icon"]}
-            />
-          </Link>
         </div>
       </div>
     </div>

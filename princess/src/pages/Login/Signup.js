@@ -28,7 +28,7 @@ const Signup = () => {
         address,
       });
       console.log("회원가입 성공:", data);
-      navigate("/signin"); // 로그인 화면 이동
+      navigate("/home"); // 홈 화면 이동
     } catch (error) {
       console.error("회원가입 실패:", error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");

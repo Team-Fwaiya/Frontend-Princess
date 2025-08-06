@@ -1,4 +1,5 @@
-const BASE_URL = "http://15.165.5.232:8080"; // 기본 API URL
+// const BASE_URL = "http://15.165.5.232:8080"; // 기본 API URL
+const BASE_URL = "https://princess-api.duckdns.org";
 
 const config = {
   API_URL: BASE_URL,
@@ -6,6 +7,7 @@ const config = {
   LOGIN: {
     JOIN: `${BASE_URL}/join`,
     LOGIN: `${BASE_URL}/login`,
+    WITHDRAW: `${BASE_URL}/api/users/withdraw`,
   },
 
   USERS: {

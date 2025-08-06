@@ -12,11 +12,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [bookDiscussions, setBookDiscussions] = useState([]);
+
   const [bookRanking, setBookRanking] = useState([]);
   const [quotes, setQuotes] = useState({ message: "", author: "" });
   const [libraries, setLibraries] = useState([]);
   const [userimage, setUserImage] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+
 
   const fetchDiscussions = async () => {
     try {
@@ -75,9 +77,7 @@ const Home = () => {
 
   // 로그아웃 처리
   const handleLogout = () => {
-    // 1. 쿠키 삭제
     removeCookie("accessToken", { path: "/" });
-    // 2. 로그인 화면으로 이동
     navigate("/");
   };
 

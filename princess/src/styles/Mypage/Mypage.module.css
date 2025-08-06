@@ -66,6 +66,7 @@
     width: 380px;
     height: 380px;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .user-info-text-container {
@@ -169,4 +170,5 @@
 .bookmark-table td:last-child {
     color: gray;
     text-decoration: underline;
+    cursor: pointer;
 }
