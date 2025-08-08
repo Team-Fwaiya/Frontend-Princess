@@ -46,7 +46,13 @@ const config = {
 
   LIBRARIES:{
     NEARBY:{
-      GET: `${BASE_URL}/api/libraries/nearby`,
+      GET: (location) => `${BASE_URL}/api/libraries/nearby?location=${encodeURIComponent(location)}`,
+    }
+  },
+
+  BOOKSTORES:{
+    NEARBY:{
+      GET: (location) => `${BASE_URL}/api/bookstores/nearby?location=${encodeURIComponent(location)}`,
     }
   },
 };

@@ -200,8 +200,13 @@ body {
 }
 
 .bubble-image {
-  width: 890px;
+  width: 800px;
   height: 230px;
+}
+
+.bubble-image2 {
+  width: 800px;
+  height: 500px;
 }
 
 .bubble-text {
@@ -211,8 +216,20 @@ body {
   width: 750px;
   line-height: 1.6;
   position: absolute;
-  top: 80px;
-  left: 54px;
+  text-align: center;
+  top: 70px;
+}
+
+.bubble-text2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #403230;
+  width: 750px;
+  line-height: 1.6;
+  position: absolute;
+  text-align: left;
+  top: 40px;
+  left: 90px;
 }
 
 .waiter-section {
