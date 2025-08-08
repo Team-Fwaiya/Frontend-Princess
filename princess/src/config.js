@@ -36,8 +36,11 @@ const config = {
   },
 
   READINGLOG: {
+    DELETE: (readingLogId)=> `${BASE_URL}/api/reading-logs/${readingLogId}`,
+    DETAIL_GET: (readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
     GET: `${BASE_URL}/api/reading-logs/my`,
     POST: `${BASE_URL}/api/reading-logs`,
+    PUT:(readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`
   },
 
   QUOTES:{
