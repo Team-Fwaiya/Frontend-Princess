@@ -266,7 +266,7 @@ const Home = () => {
               <br /> 공주님께서 찾으시는 서점은 <br />
                 {bookstores.map((boo, index) => (
                   <div className={styles["libraries"]} key={index}>
-                    {boo.poiNm}: {boo.rdnmadrNm}
+                    {boo.poiNm}: {boo.ctprvNm} {boo.signguNm} {boo.rdnmadrNm}
                   </div>
                 ))}
                   <br /> 언제든지 공주님만 불러주시면 총총총~ 뛰어가서 안내해드릴게요!
