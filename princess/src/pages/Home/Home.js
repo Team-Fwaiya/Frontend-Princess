@@ -12,11 +12,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [bookDiscussions, setBookDiscussions] = useState([]);
-
   const [bookRanking, setBookRanking] = useState([]);
   const [quotes, setQuotes] = useState({ message: "", author: "" });
   const [libraries, setLibraries] = useState([]);
-  const [userimage, setUserImage] = useState([]);
+  const [bookstores, setBookstores] = useState([]);
+  const [userAddress, setUserAddress] = useState(null);
+  const [userimage, setUserImage] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
 
@@ -53,9 +54,9 @@ const Home = () => {
     }
   };
 
-  const fetchLibraries = async () => {
+  const fetchLibraries = async (location) => {
     try {
-      const data = await get(config.LIBRARIES.NEARBY.GET);
+      const data = await get(config.LIBRARIES.NEARBY.GET(location));
       console.log("도서관 조회 성공:", data);
       setLibraries(data.result);
     } catch (error) {
@@ -64,11 +65,24 @@ const Home = () => {
     }
   };
 
+  const fetchBookstores = async (location) => {
+    try {
+      const data = await get(config.BOOKSTORES.NEARBY.GET(location));
+      console.log("서점 조회 성공:", data);
+      setBookstores(data.result);
+    } catch (error) {
+      console.error("서점 조회 실패:", error);
+      alert("서점 조회에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
   const fetchUserImage = async () => {
     try {
       const data = await get(config.USERS.GET);
       console.log("프로필 조회 성공:", data);
+      console.log("userAddress", data.result.address);
       setUserImage(data.result);
+      setUserAddress(data.result.address);
     } catch (error) {
       console.error("프로필 조회 실패:", error);
       alert("프로필 조회에 실패했습니다. 다시 시도해주세요.");
@@ -84,10 +98,17 @@ const Home = () => {
   useEffect(() => {
     fetchDiscussions();
     fetchQuotes();
-    fetchLibraries();
     RankingBooks();
     fetchUserImage();
   }, []);
+
+  useEffect(() => {
+    if (userAddress) {
+      console.log("userAddress changed:", userAddress)
+      fetchLibraries(userAddress);
+      fetchBookstores(userAddress);
+    }
+  }, [userAddress]);
 
   return (
     <div className={styles["home-container"]}>
@@ -233,21 +254,23 @@ const Home = () => {
             <img
               src={`${process.env.PUBLIC_URL}/img/bubble/bubble-mainpage_flipped.png`}
               alt="bubble"
-              className={styles["bubble-image"]}
+              className={styles["bubble-image2"]}
             />
-            <div className={styles["bubble-text"]}>
-              공주님 주변 도서관입니다. <br />
-              {libraries.map((lib, index) => (
-                <div className={styles["libraries"]} key={index}>
-                  {lib.libraryName}
-                  <br />
-                  {lib.sido}
-                  <br />
-                  {lib.sigungu}
-                  <br />
-                  {lib.address}
-                </div>
-              ))}
+            <div className={styles["bubble-text2"]}>
+              공주님께서 찾으시는 도서관은 <br />
+                {libraries.map((lib, index) => (
+                  <div className={styles["libraries"]} key={index}>
+                    {lib.libraryName}: {lib.address}
+                  </div>
+                ))}
+              <br /> 공주님께서 찾으시는 서점은 <br />
+                {bookstores.map((boo, index) => (
+                  <div className={styles["libraries"]} key={index}>
+                    {boo.poiNm}: {boo.rdnmadrNm}
+                  </div>
+                ))}
+                  <br /> 언제든지 공주님만 불러주시면 총총총~ 뛰어가서 안내해드릴게요!
+                
             </div>
           </div>
         </div>
