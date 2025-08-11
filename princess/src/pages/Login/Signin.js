@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import config from "./../../config";
 const Signin = () => {
   const navigate = useNavigate();
 
-  const [, setCookie] = useCookies(["accessToken"]);
+  const [cookies, setCookie] = useCookies(["accessToken"]);
 
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,12 @@ const Signin = () => {
     e.preventDefault();
     fetchLogin();
   };
+
+  useEffect(() => {
+    if (cookies) {
+      navigate("/home"); // 자동 로그인
+    }
+  }, [cookies]);
 
   return (
     <div className={signupStyles["signup-container"]}>
