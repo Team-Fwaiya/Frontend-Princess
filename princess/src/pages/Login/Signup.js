@@ -36,8 +36,6 @@ const Signup = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("cookies:", cookies);
-
     // 닉네임 글자수 확인
     if (nickname.length > 8) {
       alert("닉네임은 최대 8글자까지 입력할 수 있습니다.");
