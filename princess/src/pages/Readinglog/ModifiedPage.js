@@ -12,9 +12,11 @@ const ModifiedPage = () => {
 
   const searchParams =new URLSearchParams(location.search);
   const readingLogId = searchParams.get("readingLogId");
+  
+  /*신규 진입 -> 바로 편집 모드 */
+  const [isEditing, setIsEditing] = useState(!readingLogId);
 
-  const [isEditing, setIsEditing] = useState(false);
-
+  const [displayDate, setDisplayDate] = useState("");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -23,26 +25,39 @@ const ModifiedPage = () => {
   const [coverImageUrl, setCoverImageUrl] = useState("");
   const [rating, setRating] = useState(5);
 
-  useEffect(()=> {
-    const fetchReadingLogDetail = async () => {
-      try{
+  useEffect(() => {
+    if (!readingLogId){
+      setDisplayDate(formatKDate(new Date()));
+      return;
+    }        // ✅ 처음 등록 화면에서 "불러오기 실패" 방지
+    (async () => {
+      try {
         const data = await get(config.READINGLOG.DETAIL_GET(readingLogId));
-        const result = data.result;
+        const r = data.result;
+        setTitle(r.bookTitle || "");
+        setAuthor(r.bookAuthor || "");
+        setGenre(r.bookGenre || "");
+        setHashtag(r.bookHashtags || "");
+        setCoverImageUrl(r.bookCoverImageUrl || "");
+        setContent(r.content || "");
+        setRating(Number(r.rating ?? 5));
+        setIsEditing(false);
 
-        setTitle(result.bookTitle);
-        setAuthor(result.bookAuthor);
-        setGenre(result.bookGenre);
-        setHashtag(result.bookHashtags);
-        setCoverImageUrl(result.bookCoverImageUrl);
-        setContent(result.content);
-        setRating(result.rating);
-      } catch (error){
+        const raw = r.updatedAt || r.createdAt || r.date;
+        setDisplayDate(formatKDate(raw ? new Date(raw) : new Date()));
+      } catch (e) {
         alert("기록 불러오기 실패");
-        }
-    };
-
-      fetchReadingLogDetail();
+      }
+    })();
   }, [readingLogId]);
+
+  /*날짜*/
+  const formatKDate = (date) => {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}년 ${m}월 ${d}일`;
+  };
 
   const fetchSaveReadingLog = async (bookInfo) => {
     try {
@@ -144,8 +159,7 @@ const ModifiedPage = () => {
               ) : (
                 <p className={styles["letter-text"]}>{content}</p>
               )}
-              {/* TODO: 오늘 날짜로 들어가도록 수정 */}
-              <p className={styles["letter-date"]}>2025년 01월 02일</p>
+              <p className={styles["letter-date"]}>{displayDate}</p>
             </div>
             <div className={styles["comments"]}>코멘트 박스</div>
           </div>

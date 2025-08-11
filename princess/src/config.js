@@ -37,7 +37,9 @@ const config = {
     DETAIL_GET: (readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
     GET: `${BASE_URL}/api/reading-logs/my`,
     POST: `${BASE_URL}/api/reading-logs`,
-    PUT:(readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`
+    PUT:(readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
+    COVER: `${BASE_URL}/api/images/book-cover`,
   },
+
 };
 export default config;
