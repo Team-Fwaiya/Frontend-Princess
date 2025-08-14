@@ -123,12 +123,10 @@ const ModifiedPage = () => {
           rating: safeRating,
         });
         alert("수정이 완료되었습니다.");
-        return true;
       } else {
         // POST(기록 등록)
         const data = await post(config.READINGLOG.POST, {
           book: bookInfo,
-          oneLineReview: "",
           content,
           rating: safeRating,
         });
