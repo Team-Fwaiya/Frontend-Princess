@@ -36,10 +36,14 @@ const config = {
   },
 
   READINGLOG: {
+    DELETE: (readingLogId)=> `${BASE_URL}/api/reading-logs/${readingLogId}`,
+    DETAIL_GET: (readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
     GET: `${BASE_URL}/api/reading-logs/my`,
     POST: `${BASE_URL}/api/reading-logs`,
+    PUT:(readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
+    COVER: `${BASE_URL}/api/images/book-cover`,
   },
-
+  
   QUOTES:{
     GET: `${BASE_URL}/api/quotes`,
   },
@@ -55,5 +59,6 @@ const config = {
       GET: (location) => `${BASE_URL}/api/bookstores/nearby?location=${encodeURIComponent(location)}`,
     }
   },
+
 };
 export default config;
