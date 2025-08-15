@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./../../styles/Discussion/Discussion.module.css";
 import Title from "../../components/Title";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import {get} from "../../api";
+import config from "../../config";
 
 const Discussion = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const id = params.get("discussionId");
-  console.log("토론 ID:", id);
+
+  const [discussion, setDiscussion] = useState(null);
+
+  useEffect(() => {
+    const fetchDetail = async () => {
+      if (!id) return;
+      try {
+        const data = await get(config.DISCUSSIONS.DETAIL_GET(id));
+        const result = data?.result ?? data;
+        setDiscussion(result);
+      } catch (e) {
+        console.error("개별조회 실패:", e);
+      }
+    };
+    fetchDetail();
+  }, [id]);
 
   const [comments, setComments] = useState([
     {
@@ -52,8 +68,8 @@ const Discussion = () => {
         />
         <div className={styles["discussion-content"]}>
           <img
-            src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-            alt={"book-cover"}
+            src={discussion?.bookCoverImageUrl || `${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+            alt="book-cover"
             className={styles["book-cover"]}
           />
           <div className={styles["comment-section"]}>
@@ -109,7 +125,7 @@ const Discussion = () => {
         />
       </div>
       <div className={styles["discussion-exit"]}>
-        <Link to="/">
+        <Link to="/home">
           <img
             src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
             alt="exit"
