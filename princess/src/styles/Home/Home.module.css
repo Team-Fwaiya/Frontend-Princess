@@ -24,8 +24,9 @@ body {
 .mypage1{
   position: absolute;
   margin-top: 20px;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
   z-index: 3;
 }
 
@@ -33,14 +34,14 @@ body {
   position: absolute;
   width: 10px;
   height: 10px;
-  margin-right: 90px;
+  margin-right: 70px;
 }
 
 .signup1{
   position: absolute;
   margin-top: 0px;
-  width: 80px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   z-index: 3;
 }
 
@@ -199,8 +200,13 @@ body {
 }
 
 .bubble-image {
-  width: 890px;
+  width: 800px;
   height: 230px;
+}
+
+.bubble-image2 {
+  width: 800px;
+  height: 500px;
 }
 
 .bubble-text {
@@ -210,8 +216,20 @@ body {
   width: 750px;
   line-height: 1.6;
   position: absolute;
-  top: 80px;
-  left: 54px;
+  text-align: center;
+  top: 70px;
+}
+
+.bubble-text2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #403230;
+  width: 750px;
+  line-height: 1.6;
+  position: absolute;
+  text-align: left;
+  top: 40px;
+  left: 90px;
 }
 
 .waiter-section {

@@ -25,6 +25,9 @@ const config = {
     BOOKS: `${BASE_URL}/api/books`,
     POST: `${BASE_URL}/api/books`,
     PUT: (bookID) => `${BASE_URL}/api/books/${bookID}`,
+    RANKING:{
+      GET: `${BASE_URL}/api/books/ranking`,
+    }
   },
 
   DISCUSSIONS: {
@@ -39,6 +42,22 @@ const config = {
     POST: `${BASE_URL}/api/reading-logs`,
     PUT:(readingLogId) => `${BASE_URL}/api/reading-logs/${readingLogId}`,
     COVER: `${BASE_URL}/api/images/book-cover`,
+  },
+  
+  QUOTES:{
+    GET: `${BASE_URL}/api/quotes`,
+  },
+
+  LIBRARIES:{
+    NEARBY:{
+      GET: (location) => `${BASE_URL}/api/libraries/nearby?location=${encodeURIComponent(location)}`,
+    }
+  },
+
+  BOOKSTORES:{
+    NEARBY:{
+      GET: (location) => `${BASE_URL}/api/bookstores/nearby?location=${encodeURIComponent(location)}`,
+    }
   },
 
 };
