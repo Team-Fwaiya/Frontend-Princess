@@ -189,7 +189,8 @@ const Home = () => {
         <div className={styles.introduction}>
           {bookDiscussions.map((product, index) => (
             <Link
-              to={`/discussion?discussionId=1`}
+              key={product.discussionId ?? index}
+              to={`/discussion?discussionId=${product.discussionId ?? product.id}`}
               className={styles.discussion}
             >
               <div className={styles["book-item"]} key={index}>
