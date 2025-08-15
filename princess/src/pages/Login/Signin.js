@@ -43,10 +43,10 @@ const Signin = () => {
   };
 
   useEffect(() => {
-    if (cookies) {
+    if (cookies.accessToken) {
       navigate("/home"); // 자동 로그인
     }
-  }, [cookies]);
+  }, [cookies, navigate]);
 
   return (
     <div className={signupStyles["signup-container"]}>
