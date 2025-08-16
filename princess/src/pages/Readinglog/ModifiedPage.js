@@ -1,9 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "./../../styles/Readinglog/ModifiedPage.module.css";
 import Title from "../../components/Title";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { get, post, put, del } from "./../../api";
+import {
+  get,
+  del,
+  uploadImageWithJson,
+  uploadImageWithJson2,
+} from "./../../api";
 import config from "./../../config";
 import { callGeminiApi } from "./../../gemini";
 
@@ -11,14 +16,12 @@ const ModifiedPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  
   const searchParams = new URLSearchParams(location.search);
   const readingLogId = searchParams.get("readingLogId");
 
-  /* 신규 진입이 -> 바로 편집 모드 */
+  /* 신규 진입 -> 바로 편집 모드 */
   const [isEditing, setIsEditing] = useState(!readingLogId);
 
-  
   const [displayDate, setDisplayDate] = useState("");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -32,52 +35,26 @@ const ModifiedPage = () => {
 
   /* 이미지 업로드/상태 */
   const fileInputRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState("");
-  const [coverImageUrl, setCoverImageUrl] = useState(""); 
-  const PLACEHOLDER = `${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`; // 커버 이미지 수정 필요
+  const [coverImageUrl, setCoverImageUrl] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const PLACEHOLDER = `${process.env.PUBLIC_URL}/icon/upload.svg`;
 
   /* 파일 선택창 */
   const handleCoverClick = () => fileInputRef.current?.click();
 
-  /* 파일 선택 > 미리보기 > 업로드 */
+  /* 책 사진 업로드 */
   const handleFileChange = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    /* 1) 미리보기 */
+    setSelectedFile(file);
+
+    // 책 사진 미리보기
     const reader = new FileReader();
-    reader.onloadend = () => setImageSrc(reader.result);
+    reader.onloadend = () => setCoverImageUrl(reader.result);
     reader.readAsDataURL(file);
-
-    /* 2) 업로드 */
-    try {
-      const url = await handleProfileUpload(file);
-      setCoverImageUrl(url);
-    } catch (err) {
-      console.error(err);
-      alert("이미지 업로드에 실패했습니다.");
-    }
   };
 
-  /* 표지 이미지 업로드 API 호출 */
-  const handleProfileUpload = async (file) => {
-    const fd = new FormData();
-    fd.append("file", file);
-    const json = await post(config.READINGLOG.COVER, fd);
-
-
-    const url =
-      json?.result?.url ||
-      json?.result?.imageUrl ||
-      json?.result?.path ||
-      json?.url ||
-      json?.path;
-
-    if (!url) throw new Error("업로드 URL없음");
-    return url;
-  };
-
-  
   useEffect(() => {
     if (!readingLogId) {
       setDisplayDate(formatKDate(new Date()));
@@ -94,7 +71,6 @@ const ModifiedPage = () => {
         setCoverImageUrl(r.bookCoverImageUrl || "");
 
         /* 미리보기 초기화 */
-        setImageSrc(""); 
         setContent(r.content || "");
         setRating(Number(r.rating ?? 5));
         setIsEditing(false);
@@ -117,30 +93,39 @@ const ModifiedPage = () => {
   };
 
   /* 저장(등록/수정)*/
-  const fetchSaveReadingLog = async (bookInfo, safeRating) => {
+  const fetchSaveReadingLog = async (selectedFile, bookInfo, safeRating) => {
     try {
       if (readingLogId) {
         // PUT(기록 수정)
-        await put(config.READINGLOG.PUT(readingLogId), {
-          book: bookInfo,
-          content,
-          rating: safeRating,
-        });
+        await uploadImageWithJson2(
+          config.READINGLOG.PUT(readingLogId),
+          selectedFile,
+          {
+            book: bookInfo,
+            content: content,
+            rating: safeRating,
+          }
+        );
         alert("수정이 완료되었습니다.");
         return true;
       } else {
         // POST(기록 등록)
-        const data = await post(config.READINGLOG.POST, {
-          book: bookInfo,
-          oneLineReview: "",
-          content,
-          rating: safeRating,
-        });
+        const data = await uploadImageWithJson(
+          config.READINGLOG.POST,
+          selectedFile,
+          {
+            book: bookInfo,
+            content: content,
+            rating: safeRating,
+          }
+        );
+
         const createdId = data.result?.readingLogId;
         if (createdId) {
           navigate(`/modifiedpage?readingLogId=${createdId}`);
         } else {
           alert("등록이 완료되었습니다.");
+          navigate("/readinglog");
         }
         return true;
       }
@@ -155,17 +140,19 @@ const ModifiedPage = () => {
   const handleEditClick = () => setIsEditing(true);
 
   const handleSaveClick = async () => {
-    const safeRating = Math.max(0, Math.min(5, Math.round(Number(rating) || 0)));
+    const safeRating = Math.max(
+      0,
+      Math.min(5, Math.round(Number(rating) || 0))
+    );
 
     const bookInfo = {
       title,
       author,
       genre,
       hashtags: hashtag,
-      coverImageUrl,
     };
 
-    const ok = await fetchSaveReadingLog(bookInfo, safeRating);
+    const ok = await fetchSaveReadingLog(selectedFile, bookInfo, safeRating);
     if (ok) setIsEditing(false); // 성공했을 때만 보기 모드로
   };
 
@@ -234,7 +221,9 @@ const ModifiedPage = () => {
         <div className={styles["modify-contents"]}>
           <div className={styles["modify-content-left"]}>
             <div className={styles["letter-section"]} style={letterPaperStyle}>
-              <div className={styles["letter-quote"]}>오늘은 어떤 나로 남았을까?</div>
+              <div className={styles["letter-quote"]}>
+                오늘은 어떤 나로 남았을까?
+              </div>
 
               {isEditing ? (
                 <textarea
@@ -244,9 +233,9 @@ const ModifiedPage = () => {
                   placeholder="오늘의 생각을 적어보세요..."
                 />
               ) : (
-                <p className={styles["letter-text"]}>{content}</p>
+                <div className={styles["letter-text"]}>{content}</div>
               )}
-              <p className={styles["letter-date"]}>{displayDate}</p>
+              <div className={styles["letter-date"]}>{displayDate}</div>
             </div>
             <div className={styles["comments"]}>
               {!isEditing && ( // 편집 모드가 아닐 때만 AI 섹션을 보여줍니다.
@@ -273,18 +262,20 @@ const ModifiedPage = () => {
 
           <div className={styles["modify-content-right"]}>
             <div className={styles["book-info"]}>
-              <img
-                src={imageSrc || coverImageUrl || PLACEHOLDER}
-                alt="book-cover"
-                className={styles["book-cover"]}
-                onClick={isEditing ? handleCoverClick : undefined}
-                style={{ cursor: isEditing ? "pointer" : "default" }}
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.src = PLACEHOLDER;
-                }}
-                title={isEditing ? "클릭하여 표지 선택" : undefined}
-              />
+              <div className={styles["book-cover-wrapper"]}>
+                <img
+                  src={coverImageUrl || PLACEHOLDER}
+                  alt="book-cover"
+                  className={styles["book-cover"]}
+                  onClick={isEditing ? handleCoverClick : undefined}
+                  style={{ cursor: isEditing ? "pointer" : "default" }}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = PLACEHOLDER;
+                  }}
+                  title={isEditing ? "클릭하여 표지 선택" : undefined}
+                />
+              </div>
               {isEditing && (
                 <input
                   type="file"
@@ -339,7 +330,10 @@ const ModifiedPage = () => {
                     max="5"
                     onChange={(e) =>
                       setRating(
-                        Math.max(0, Math.min(5, Math.round(Number(e.target.value) || 0)))
+                        Math.max(
+                          0,
+                          Math.min(5, Math.round(Number(e.target.value) || 0))
+                        )
                       )
                     }
                     placeholder="Rating (0~5)"
@@ -357,8 +351,11 @@ const ModifiedPage = () => {
                   <p className={styles["book-author"]}>Author: {author}</p>
                   <p className={styles["book-genre"]}>Genre: {genre}</p>
                   <p className={styles["book-rating"]}>
-                    Rating: {"★".repeat(Math.max(0, Math.min(5, Number(rating))))}
-                    {"☆".repeat(Math.max(0, 5 - Math.max(0, Math.min(5, Number(rating)))))}
+                    Rating:{" "}
+                    {"★".repeat(Math.max(0, Math.min(5, Number(rating))))}
+                    {"☆".repeat(
+                      Math.max(0, 5 - Math.max(0, Math.min(5, Number(rating))))
+                    )}
                   </p>
                 </>
               )}
@@ -366,18 +363,30 @@ const ModifiedPage = () => {
               {/*필요 시 버튼 수정*/}
               <div className={styles["button-group"]}>
                 {isEditing ? (
-                  <button className={styles["book-btn"]} onClick={handleSaveClick} title="저장">
+                  <button
+                    className={styles["book-btn"]}
+                    onClick={handleSaveClick}
+                    title="저장"
+                  >
                     💾
                   </button>
                 ) : (
-                  <button className={styles["book-btn"]} onClick={handleEditClick} title="편집">
+                  <button
+                    className={styles["book-btn"]}
+                    onClick={handleEditClick}
+                    title="편집"
+                  >
                     ✏️
                   </button>
                 )}
                 <button className={styles["book-btn"]} title="공유(준비중)">
                   📨
                 </button>
-                <button className={styles["book-btn"]} onClick={handleDeleteClick} title="삭제">
+                <button
+                  className={styles["book-btn"]}
+                  onClick={handleDeleteClick}
+                  title="삭제"
+                >
                   🗑️
                 </button>
               </div>
