@@ -1,6 +1,6 @@
-const API_KEY = 'AIzaSyBgWycf5DkS46QXCOhWBdWbqhF_W7Bh_n0'; 
+const API_KEY = 'AIzaSyBzAQKo5WUE62fvkNvphdPjPFooNIvDoNE'; 
 
-const API_URL = 'https://generativelace.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
 /**
  * Gemini API를 호출하여 프롬프트에 대한 답변을 받아오는 함수
@@ -9,9 +9,7 @@ const API_URL = 'https://generativelace.googleapis.com/v1beta/models/gemini-pro:
  */
 export const callGeminiApi = async (prompt) => {
   // API 키가 입력되었는지 확인
-  if (!API_KEY || API_KEY === 'AIzaSyBgWycf5DkS46QXCOhWBdWbqhF_W7Bh_n0') {
-    return "오류: API 키가 설정되지 않았습니다. src/gemini.js 파일을 확인해주세요.";
-  }
+  
 
   try {
     const response = await fetch(API_URL, {

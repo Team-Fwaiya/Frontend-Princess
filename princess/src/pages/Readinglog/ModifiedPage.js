@@ -187,7 +187,9 @@ const ModifiedPage = () => {
     const prompt = `
       '${title}' (${author} 저)라는 책에 대한 나의 독서록이야.
       아래 독서록 내용을 바탕으로 따뜻하게 공감하는 메시지를 작성하고,
-      이와 비슷한 분위기나 주제를 다루는 다른 책을 5권 추천해 줘. 말투는 공주님을 모시는 집사 말투로 부탁해.
+      이와 비슷한 분위기나 주제를 다루는 다른 책을 3권 추천해 줘.
+      총 5줄로 줄여서 잘 정리해서 답변해줘. 추천도서는 저자까지 알려줘.
+      말투는 공주님을 모시는 집사 말투로 부탁해.
 
       ---
       ${content}
@@ -196,7 +198,7 @@ const ModifiedPage = () => {
 
     const result = await callGeminiApi(prompt);
     
-    setAiResponse(result);   // AI 답변을 상태에 저장
+    setAiResponse(result.trim());   // AI 답변을 상태에 저장
     setIsAiLoading(false); // 로딩 종료
   };
 
@@ -240,19 +242,21 @@ const ModifiedPage = () => {
             <div className={styles["comments"]}>
               {!isEditing && ( // 편집 모드가 아닐 때만 AI 섹션을 보여줍니다.
                 <>
-                  <button 
-                    onClick={handleAiAnalysis} 
-                    disabled={isAiLoading}
-                    className={styles["ai-button"]} // CSS 클래스 추가
-                  >
-                    {isAiLoading ? '분석 중...' : '🤖 AI 코멘트 받기'}
-                  </button>
+                  {!aiResponse && (
+                    <button 
+                      onClick={handleAiAnalysis} 
+                      disabled={isAiLoading}
+                      className={styles["ai-button"]}
+                    >
+                      {isAiLoading ? '집사 달려가는 중...' : '🤵 집사를 부르시겠습니까?'}
+                    </button>
+                  )}
 
-                  {isAiLoading && <p>AI가 독서록을 읽고 있어요...</p>}
+                  {isAiLoading && <p>집사가 독서록을 읽고 있어요...</p>}
 
                   {aiResponse && (
                     <div className={styles["ai-response-box"]}>
-                      <p dangerouslySetInnerHTML={{ __html: aiResponse.replace(/\n/g, '<br />') }} />
+                      <div dangerouslySetInnerHTML={{ __html: aiResponse.replace(/\n/g, '<br />') }} />
                     </div>
                   )}
                 </>
