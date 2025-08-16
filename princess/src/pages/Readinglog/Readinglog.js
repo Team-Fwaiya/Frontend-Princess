@@ -14,13 +14,13 @@ const Readinglog = () => {
   const fetchReadingLog = async () => {
     try {
       const data = await get(config.READINGLOG.GET);
-      const addCard = { bookCoverImageUrl: "/icon/add.svg"};
+      console.log("Reading Log Data:", data);
+      const addCard = { bookCoverImageUrl: "/icon/add.svg" };
       setReadingLogs([addCard, ...data.result]);
     } catch (error) {
       alert("정보 조회에 실패했습니다. 다시 시도해주세요.");
     }
   };
-  
 
   useEffect(() => {
     fetchReadingLog();
@@ -80,15 +80,15 @@ const Readinglog = () => {
                 ) : (
                   <Link to={`/modifiedpage?readingLogId=${book.readingLogId}`}>
                     <img
-                      src={`${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}   //book.bookCoverImageUrl-> 이미지 설정 X의 경우로 변경
+                      src={book.bookCoverImageUrl}
                       alt={book.title || "Book Cover"}
                       className={styles["book-cover"]}
                     />
                   </Link>
-                    )}
-               </div>
-          ))}
-        </div>
+                )}
+              </div>
+            ))}
+          </div>
           <div className={styles["readinglog-comments"]}>
             <div className={styles["comment-bubble"]}>
               <img

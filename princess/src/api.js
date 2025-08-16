@@ -108,6 +108,58 @@ export const patch = async (endpoint, imageFile, options = {}) => {
   }
 };
 
+// POST 요청 - 사용자 이미지 + JSON 업로드
+export const uploadImageWithJson = async (
+  endpoint,
+  imageFile,
+  jsonData,
+  options = {}
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("coverImage", imageFile);
+    formData.append("readingLog", JSON.stringify(jsonData));
+
+    const response = await api.post(endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      ...options,
+    });
+
+    validateContentType(response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// PUT 요청 - 사용자 이미지 + JSON 업로드
+export const uploadImageWithJson2 = async (
+  endpoint,
+  imageFile,
+  jsonData,
+  options = {}
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("coverImage", imageFile);
+    formData.append("readingLog", JSON.stringify(jsonData));
+
+    const response = await api.put(endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      ...options,
+    });
+
+    validateContentType(response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // 응답 타입 검사 함수
 const validateContentType = (response) => {
   const contentType = response.headers["content-type"] || "";
