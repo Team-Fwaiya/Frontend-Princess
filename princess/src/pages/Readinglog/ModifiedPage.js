@@ -5,6 +5,7 @@ import Title from "../../components/Title";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { get, post, put, del } from "./../../api";
 import config from "./../../config";
+import { callGeminiApi } from "./../../gemini";
 
 const ModifiedPage = () => {
   const navigate = useNavigate();
@@ -25,6 +26,9 @@ const ModifiedPage = () => {
   const [genre, setGenre] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [rating, setRating] = useState(5);
+
+  const [aiResponse, setAiResponse] = useState("");
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   /* 이미지 업로드/상태 */
   const fileInputRef = useRef(null);
@@ -182,6 +186,33 @@ const ModifiedPage = () => {
     }
   };
 
+  const handleAiAnalysis = async () => {
+    // 분석할 독서록 내용이 없으면 실행하지 않음
+    if (!content) {
+      alert("분석할 독서록 내용이 없습니다.");
+      return;
+    }
+
+    setIsAiLoading(true); // 로딩 시작
+    setAiResponse("");    // 이전 답변 초기화
+
+    // AI에게 보낼 프롬프트 (제목, 저자, 내용을 모두 활용)
+    const prompt = `
+      '${title}' (${author} 저)라는 책에 대한 나의 독서록이야.
+      아래 독서록 내용을 바탕으로 따뜻하게 공감하는 메시지를 작성하고,
+      이와 비슷한 분위기나 주제를 다루는 다른 책을 5권 추천해 줘. 말투는 공주님을 모시는 집사 말투로 부탁해.
+
+      ---
+      ${content}
+      ---
+    `;
+
+    const result = await callGeminiApi(prompt);
+    
+    setAiResponse(result);   // AI 답변을 상태에 저장
+    setIsAiLoading(false); // 로딩 종료
+  };
+
   /* 편지지 */
   const letterPaperStyle = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/img/pink_letter_paper.png)`,
@@ -217,7 +248,27 @@ const ModifiedPage = () => {
               )}
               <p className={styles["letter-date"]}>{displayDate}</p>
             </div>
-            <div className={styles["comments"]}>코멘트 박스</div>
+            <div className={styles["comments"]}>
+              {!isEditing && ( // 편집 모드가 아닐 때만 AI 섹션을 보여줍니다.
+                <>
+                  <button 
+                    onClick={handleAiAnalysis} 
+                    disabled={isAiLoading}
+                    className={styles["ai-button"]} // CSS 클래스 추가
+                  >
+                    {isAiLoading ? '분석 중...' : '🤖 AI 코멘트 받기'}
+                  </button>
+
+                  {isAiLoading && <p>AI가 독서록을 읽고 있어요...</p>}
+
+                  {aiResponse && (
+                    <div className={styles["ai-response-box"]}>
+                      <p dangerouslySetInnerHTML={{ __html: aiResponse.replace(/\n/g, '<br />') }} />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
 
           <div className={styles["modify-content-right"]}>
