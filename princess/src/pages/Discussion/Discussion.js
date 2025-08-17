@@ -67,11 +67,22 @@ const Discussion = () => {
           className={styles["square-column-left"]}
         />
         <div className={styles["discussion-content"]}>
-          <img
-            src={discussion?.bookCoverImageUrl || `${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
-            alt="book-cover"
-            className={styles["book-cover"]}
-          />
+          <div className={styles["discussion-book"]}
+            style={{backgroundImage: `url(${process.env.PUBLIC_URL}/img/princessitem/princess_book.png)`}}
+          >
+            <img
+              src={discussion?.bookCoverImageUrl || `${process.env.PUBLIC_URL}/img/AA1CECcz.jpeg`}
+              alt="book-cover"
+              className={styles["book-cover"]}
+            />
+            <div className={styles["princess-item"]}>
+              <img
+                src={`${process.env.PUBLIC_URL}/img/princessitem/crown.png`}
+                alt={"princess-crown"}
+                className={styles["princess-crown"]}
+              />
+            </div>
+          </div>
           <div className={styles["comment-section"]}>
             <div className={styles["comment-scroll"]}>
               {comments.map((c) => (
@@ -103,6 +114,15 @@ const Discussion = () => {
               <button onClick={handleSubmit}>→</button>
             </div>
           </div>
+          <div className={styles["discussion-exit"]}>
+            <Link to="/home">
+              <img
+                src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
+                alt="exit"
+                className={styles["dicussion-icon"]}
+              />
+            </Link>
+          </div>
         </div>
         <img
           src={`${process.env.PUBLIC_URL}/img/square_column/readinglog_square_r.svg`}
@@ -110,31 +130,9 @@ const Discussion = () => {
           className={styles["square-column-right"]}
         />
       </div>
-      <div className={styles["princess-book"]}>
-        <img
-          src={`${process.env.PUBLIC_URL}/img/princessitem/princess_book.png`}
-          alt={"princess-book"}
-          className={styles["princess-book"]}
-        />
-      </div>
-      <div className={styles["princess-item"]}>
-        <img
-          src={`${process.env.PUBLIC_URL}/img/princessitem/crown.png`}
-          alt={"princess-crown"}
-          className={styles["princess-crown"]}
-        />
-      </div>
-      <div className={styles["discussion-exit"]}>
-        <Link to="/home">
-          <img
-            src={`${process.env.PUBLIC_URL}/icon/exit.svg`}
-            alt="exit"
-            className={styles["dicussion-icon"]}
-          />
-        </Link>
-      </div>
     </div>
   );
 };
 
 export default Discussion;
+
