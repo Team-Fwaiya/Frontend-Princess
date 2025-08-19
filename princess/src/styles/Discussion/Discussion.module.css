@@ -1,45 +1,59 @@
+/* Layout */
 .discussion-wrapper{
-    display: flex;
-    margin: 40px 0 0 0;
-    justify-content: space-around;
+  display: flex;
+  gap: 30px;
+  margin: 40px;
 }
 
 .discussion-content{
-    display: flex;
-    justify-content: flex-start;
-    gap: 70px;              /* 🔹 책과 댓글창 사이 간격 */
-    margin-left: 100px;
+  display: flex;
+  width: 100%;
+  gap: 30px;                 /* 가운데 여백 제거 */
+  align-items: flex-start;
 }
 
-/* 책 이미지 */
-.book-section {
-  text-align: center;
-  margin-bottom: 40px;
+/* Discussion book */
+.discussion-book{
+  position: relative;
+  width: 32%;
+  aspect-ratio: 3 / 4;    
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
+/* 책 위에 덮어씌울 커버 이미지 */
 .book-cover {
-  width: 180px;
-  height: auto;              
-  border-radius: 16px;
+  position: absolute;
+  top: 27.5%;
+  right: 15%;
+  width: 51%;
+  height: auto;
   object-fit: contain;
-  flex-shrink: 0;            
-  margin-right: 70px;
-  margin-top: -120px;      
   z-index: 1;
-  gap: 70px;
 }
 
-/* 댓글 영역 */
+/* 왕관 장식 */
+.princess-crown{
+  position: absolute;
+  top: 3%;
+  left: 40%;
+  width: 40%;
+  z-index: 1;
+}
+
+/* Comments */
 .comment-section {
-    display: flex;
-    flex-direction: column;
-    width: 650px;
-    height: 500px;
-    margin-top: 20px;
-    background-color: #fff0f5;
-    padding: 16px;
-    border-radius: 20px;
-    border: 2px solid #f8bbd0;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 85%;
+  margin-top: 20px;
+  background-color: #fff0f5;
+  padding: 16px;
+  border-radius: 20px;
+  border: 2px solid #f8bbd0;
 }
 
 .comment-scroll {
@@ -49,7 +63,6 @@
   margin-bottom: 12px;
 }
 
-/* 댓글 박스 */
 .comment {
   background-color: #ffffff;
   border: 1px solid #f8bbd0;
@@ -59,7 +72,6 @@
   box-shadow: 2px 2px 8px rgba(248, 187, 208, 0.4);
 }
 
-/* ✅ 프로필 + 이름 + 계급 한 줄 */
 .comment-header-inline {
   display: flex;
   align-items: center;
@@ -110,7 +122,6 @@
   border-radius: 8px;
   font-size: 14px;
 }
-
 .comment-input button {
   margin-left: 8px;
   padding: 10px 16px;
@@ -122,25 +133,17 @@
   cursor: pointer;
   transition: 0.3s;
 }
-
 .comment-input button:hover {
   background-color: #ec407a;
 }
 
-.princess-book{
-    position: absolute;
-    top: 152px;
-    left: 70px;
-}
+.discussion-exit{}
 
-.princess-crown{
-    position: absolute;
-    top: 333px;
-    left: 275px;
+/* 반응형 (선택) */
+@media (max-width: 960px) {
+  .discussion-book { width: 40%; }
 }
-
-.discussion-exit{
-  position: absolute;
-  top: 280px;
-  right: 95px;
+@media (max-width: 720px) {
+  .discussion-content { flex-direction: column; }
+  .discussion-book { width: 100%; max-width: 420px; margin: 0 auto; }
 }
