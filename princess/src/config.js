@@ -33,6 +33,8 @@ const config = {
   DISCUSSIONS: {
     GET: `${BASE_URL}/api/discussions`,
     DETAIL_GET: (discussionID) => `${BASE_URL}/api/discussions/${discussionID}`,
+    COMMENT_GET: (id)=>`${BASE_URL}/api/discussions/${id}/comments`,
+    COMMENT_POST: (id)=>`${BASE_URL}/api/discussions/${id}/comments`,
   },
 
   READINGLOG: {
